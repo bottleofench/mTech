@@ -1,0 +1,15 @@
+name: mTech
+version: 0.1
+main: api.bottleofench.main.Main
+api-version: 1.18
+authors: [ bottleofench ]
+
+commands:
+  mtech:
+    permission: mtech
+    aliases:
+      - tech
+
+permissions:
+  mtech:
+    default: op
