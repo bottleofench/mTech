@@ -69,6 +69,25 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
             }
             return result;
         }
+
+        if (args.length == 4 && args[1].equals("gamerule")) {
+            List<String> gameRules = new ArrayList<>();
+            List<String> bool = new ArrayList<>();
+            bool.add("true"); bool.add("false");
+            gameRules.add(GameRule.SPAWN_RADIUS.getName()); gameRules.add(GameRule.MAX_COMMAND_CHAIN_LENGTH.getName());
+            gameRules.add(GameRule.MAX_ENTITY_CRAMMING.getName()); gameRules.add(GameRule.PLAYERS_SLEEPING_PERCENTAGE.getName());
+            gameRules.add(GameRule.RANDOM_TICK_SPEED.getName());
+
+            if (!gameRules.contains(GameRule.getByName(args[2]).getName())) {
+                List<String> result = new ArrayList<>();
+                for (String b : bool) {
+                    if (b.toLowerCase().startsWith(args[3].toLowerCase()))
+                        result.add(b);
+                }
+                return result;
+            }
+            return null;
+        }
         return null;
     }
 }
