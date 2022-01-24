@@ -34,7 +34,7 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
         if (args.length == 2) {
             List<String> settings = new ArrayList<>();
 
-            settings.add("world-profile"); settings.add("spawn-limit"); settings.add("view-distance"); settings.add("pvp");
+            settings.add("world-profile"); settings.add("spawn-limit"); settings.add("pvp");
             settings.add("gamerule");
             List<String> result = new ArrayList<>();
             for (String b : settings) {

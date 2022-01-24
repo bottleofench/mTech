@@ -5,6 +5,7 @@ import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -22,6 +23,7 @@ public class Command implements CommandExecutor {
                 sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.unknown-world-error")));
             }
             World world = Bukkit.getWorld(args[0]);
+            assert world != null;
 
             if (args.length == 4 && args[2].equals("monsters")) {
                 world.setMonsterSpawnLimit(Integer.parseInt(args[3]));
@@ -50,7 +52,7 @@ public class Command implements CommandExecutor {
                 if (args[2].equals("true") || args[2].equals("false")) {
                     boolean f = Boolean.getBoolean(args[2]);
                     world.setPVP(f);
-                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.pvp")).replace("%value%", args[2]));
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.pvp-mode-change")).replace("%value%", args[2]));
                 }
                 else {
                     sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
