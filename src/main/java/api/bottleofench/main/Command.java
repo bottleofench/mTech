@@ -46,6 +46,17 @@ public class Command implements CommandExecutor {
                 }
             }
 
+            if (args.length == 3 && args[1].equals("pvp")) {
+                if (args[2].equals("true") || args[2].equals("false")) {
+                    boolean f = Boolean.getBoolean(args[2]);
+                    world.setPVP(f);
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.pvp")).replace("%value%", args[2]));
+                }
+                else {
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
+                }
+            }
+
             if (args.length == 4 && args[1].equals("gamerule")) {
                 if (!Arrays.stream(GameRule.values()).collect(Collectors.toList()).contains(GameRule.getByName(args[2]))) {
                     sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.command-error-syntax")));

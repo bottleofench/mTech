@@ -57,6 +57,18 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
             return result;
         }
 
+        if (args.length == 3 && args[1].equals("pvp")) {
+            List<String> bool = new ArrayList<>();
+            bool.add("true"); bool.add("false");
+
+            List<String> result = new ArrayList<>();
+            for (String b : bool) {
+                if (b.toLowerCase().startsWith(args[2].toLowerCase()))
+                    result.add(b);
+            }
+            return result;
+        }
+
         if (args.length == 3 && args[1].equals("gamerule")) {
             List<String> settings = new ArrayList<>();
             for (GameRule gameRule : GameRule.values()) {

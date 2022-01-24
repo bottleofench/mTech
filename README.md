@@ -8,6 +8,6 @@ Features:
 
 Building: Maven.
 Dependencies: none.
-May not work on Spigot!
+May not work with Spigot!
 
 (Translated from Russian using DeepL)

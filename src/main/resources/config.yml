@@ -3,6 +3,7 @@ messages:
   command-error-syntax: "&cOops... Something went wrong.. Check the syntax of the command!"
   unknown-world-error: "&cYou're trying to change a world that doesn't exist!"
   gamerule-value-change: "&aThe game rule has been successfully changed for &f%world%!"
+  pvp: "&aYou switched pvp mode to &f%value%"
   spawn-limits:
     monsters: "&aYou have successfully set a monster spawn limit in &f%world% &ato &f%value%!"
     animals: "&aYou have successfully set an animal spawn limit in &f%world% &ato &f%value%!"
