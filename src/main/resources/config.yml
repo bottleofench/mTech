@@ -1,0 +1,15 @@
+messages:
+  reload: "&aConfiguration successfully reloaded!"
+  command-error-syntax: "&cOops... Something went wrong.. Check the syntax of the command!"
+  unknown-world-error: "&cYou're trying to change a world that doesn't exist!"
+  gamerule-value-change: "&aThe game rule has been successfully changed for &f%world%!"
+  spawn-limits:
+    monsters: "&aYou have successfully set a monster spawn limit in &f%world% &ato &f%value%!"
+    animals: "&aYou have successfully set an animal spawn limit in &f%world% &ato &f%value%!"
+    ambient: "&aYou have successfully set an ambient spawn limit in &f%world% &ato &f%value%!"
+  world-profile:
+    - "&6&lWorld profile: &f%world%"
+    - "&eEntity count: &f%entity_count%"
+    - "&ePlayer count: &f%player_count%"
+    - "&eView distance: &f%view_distance%"
+    - "&eLoaded chunks count: &f%loaded_chunks_count%"

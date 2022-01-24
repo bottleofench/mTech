@@ -17,6 +17,7 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
         if (!sender.hasPermission("mtech")) return null;
         if (args.length == 1) {
             List<String> worlds = new ArrayList<>();
+            worlds.add("reload");
             for (World world : Bukkit.getWorlds()) {
                 worlds.add(world.getName());
             }
