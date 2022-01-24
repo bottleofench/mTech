@@ -1,4 +1,4 @@
-#mTech
+# mTech
 
 Technical plugin for easy administration of Minecraft servers.
 
