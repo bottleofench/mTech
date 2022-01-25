@@ -5,6 +5,7 @@ import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,7 +36,7 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
             List<String> settings = new ArrayList<>();
 
             settings.add("world-profile"); settings.add("spawn-limit"); settings.add("pvp");
-            settings.add("gamerule");
+            settings.add("gamerule"); settings.add("clear-entities");
             List<String> result = new ArrayList<>();
             for (String b : settings) {
                 if (b.toLowerCase().startsWith(args[1].toLowerCase()))

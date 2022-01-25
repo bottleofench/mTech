@@ -5,10 +5,14 @@ import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Command implements CommandExecutor {
@@ -47,6 +51,7 @@ public class Command implements CommandExecutor {
                             .replace("%entity_count%", String.valueOf(world.getEntityCount()))
                             .replace("%player_count%", String.valueOf(world.getPlayerCount()))
                             .replace("%view_distance%", String.valueOf(world.getViewDistance()))
+                            .replace("%sim_distance%", String.valueOf(world.getSimulationDistance()))
                             .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).collect(Collectors.toList()).size())));
                 }
             }
