@@ -27,15 +27,18 @@ public class Command implements CommandExecutor {
 
             if (args.length == 4 && args[2].equals("monsters")) {
                 world.setMonsterSpawnLimit(Integer.parseInt(args[3]));
-                sender.sendMessage("Вы успешно установили ограничение на спавн монстров в мире " + args[0] + " на " + args[3]);
+                sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.spawn-limits.monsters"))
+                        .replace("%world%", args[0]).replace("%value%", args[3]));
             }
             if (args.length == 4 && args[2].equals("animals")) {
                 world.setAnimalSpawnLimit(Integer.parseInt(args[3]));
-                sender.sendMessage("Вы успешно установили ограничение на спавн животных в мире " + args[0] + " на " + args[3]);
+                sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.spawn-limits.animals"))
+                        .replace("%world%", args[0]).replace("%value%", args[3]));
             }
             if (args.length == 4 && args[2].equals("ambient")) {
                 world.setAmbientSpawnLimit(Integer.parseInt(args[3]));
-                sender.sendMessage("Вы успешно установили ограничение на спавн эмбиент-мобов в мире " + args[0] + " на " + args[3]);
+                sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.spawn-limits.ambient"))
+                        .replace("%world%", args[0]).replace("%value%", args[3]));
             }
 
             if (args.length == 2 && args[1].equals("world-profile")) {
