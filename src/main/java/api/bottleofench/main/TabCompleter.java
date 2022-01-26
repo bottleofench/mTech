@@ -34,7 +34,7 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
             List<String> settings = new ArrayList<>();
 
             settings.add("world-profile"); settings.add("spawn-limit"); settings.add("pvp");
-            settings.add("gamerule"); settings.add("difficulty");
+            settings.add("gamerule"); settings.add("difficulty"); settings.add("ticks-per-mob-spawn");
             List<String> result = new ArrayList<>();
             for (String b : settings) {
                 if (b.toLowerCase().startsWith(args[1].toLowerCase()))
@@ -42,6 +42,19 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
             }
             return result;
 
+        }
+
+        if (args.length == 3 && args[1].equals("ticks-per-mob-spawn")) {
+            List<String> settings = new ArrayList<>();
+            settings.add("reset"); settings.add("monsters"); settings.add("animals"); settings.add("ambient");
+            settings.add("water-ambient"); settings.add("water-animals");
+
+            List<String> result = new ArrayList<>();
+            for (String b : settings) {
+                if (b.toLowerCase().startsWith(args[2].toLowerCase()))
+                    result.add(b);
+            }
+            return result;
         }
 
         if (args.length == 3 && args[1].equals("spawn-limit")) {
