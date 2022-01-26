@@ -1,11 +1,8 @@
-name: Java CI
-
-on: [push]
-
+name: Build
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 17
@@ -15,7 +12,8 @@ jobs:
           distribution: 'temurin'
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-      - run: mkdir staging && cp target/*.jar staging
+      - name: Prepare to upload artifact
+        run: mkdir staging && cp target/*.jar staging
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
