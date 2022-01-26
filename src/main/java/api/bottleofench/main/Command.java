@@ -98,8 +98,8 @@ public class Command implements CommandExecutor {
             if (args.length == 2 && args[1].equals("world-profile")) {
                 for (String s : Main.getInstance().getConfig().getStringList("messages.world-profile")) {
                     sender.sendMessage(Main.format(s).replace("%world%", args[0])
-                            .replace("%entity_count%", String.valueOf(world.getEntities().size() - 1))
-                            .replace("%player_count%", String.valueOf(world.getPlayers().size() - 1))
+                            .replace("%entity_count%", String.valueOf(world.getEntities().size()))
+                            .replace("%player_count%", String.valueOf(world.getPlayers().size()))
                             .replace("%view_distance%", String.valueOf(world.getViewDistance()))
                             .replace("%sim_distance%", String.valueOf(world.getSimulationDistance()))
                             .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).collect(Collectors.toList()).size())));
