@@ -9,11 +9,14 @@ messages:
     monsters: "&aYou have successfully set a monster spawn limit in &f%world% &ato &f%value%!"
     animals: "&aYou have successfully set an animal spawn limit in &f%world% &ato &f%value%!"
     ambient: "&aYou have successfully set an ambient spawn limit in &f%world% &ato &f%value%!"
+    water-animals: "&aYou have successfully set an animal spawn limit in &f%world% &ato &f%value%!"
+    water-ambient: "&aYou have successfully set an ambient spawn limit in &f%world% &ato &f%value%!"
+    reset: "&aYou have successfully reset spawn limit in &f%world% for all mob types!"
   server-profile:
     - "&6&lServer profile"
     - "&eTPS: &f%tps%"
     - "&eOS: &f%os%"
-    - "&eRAM: &f%ram_using%MB &f/ &f%ram_max%MB"
+    - "&eRAM: &f%ram_using%MB / %ram_max%MB"
     - "&eCPU: &f%cpu_using%% / 100%"
   world-profile:
     - "&6&lWorld profile: &f%world%"

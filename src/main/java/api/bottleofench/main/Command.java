@@ -33,8 +33,8 @@ public class Command implements CommandExecutor {
                 sender.sendMessage(Main.format(s)
                         .replace("%tps%", String.valueOf(String.format("%.1f", Bukkit.getServer().getTPS()[0])).replace(",", "."))
                         .replace("%os%", System.getProperty("os.name"))
-                        .replace("%ram_using%", String.valueOf((Runtime.getRuntime().maxMemory() - Runtime.getRuntime().freeMemory()) / 1000000))
-                        .replace("%ram_max%", String.valueOf(Runtime.getRuntime().maxMemory() / 1000000))
+                        .replace("%ram_using%", String.valueOf((Runtime.getRuntime().maxMemory() - Runtime.getRuntime().freeMemory()) / 1048576))
+                        .replace("%ram_max%", String.valueOf(Runtime.getRuntime().maxMemory() / 1048576))
                         .replace("%cpu_using%", String.valueOf((int) (osBean.getCpuLoad() * 100))));
             }
         }
@@ -45,20 +45,64 @@ public class Command implements CommandExecutor {
             World world = Bukkit.getWorld(args[0]);
             assert world != null;
 
+            if (args.length == 3 && args[2].equals("reset")) {
+                world.setMonsterSpawnLimit(70);
+                world.setAnimalSpawnLimit(15);
+                world.setWaterAnimalSpawnLimit(5);
+                world.setAmbientSpawnLimit(10);
+                world.setWaterAmbientSpawnLimit(5);
+                sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.spawn-limits.reset"))
+                        .replace("%world%", args[0]));
+            }
             if (args.length == 4 && args[2].equals("monsters")) {
-                world.setMonsterSpawnLimit(Integer.parseInt(args[3]));
-                sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.spawn-limits.monsters"))
-                        .replace("%world%", args[0]).replace("%value%", args[3]));
+                try {
+                    world.setMonsterSpawnLimit(Integer.parseInt(args[3]));
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.spawn-limits.monsters"))
+                            .replace("%world%", args[0]).replace("%value%", args[3]));
+                }
+                catch (NumberFormatException e) {
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
+                }
             }
             if (args.length == 4 && args[2].equals("animals")) {
-                world.setAnimalSpawnLimit(Integer.parseInt(args[3]));
-                sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.spawn-limits.animals"))
-                        .replace("%world%", args[0]).replace("%value%", args[3]));
+                try {
+                    world.setAnimalSpawnLimit(Integer.parseInt(args[3]));
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.spawn-limits.animals"))
+                            .replace("%world%", args[0]).replace("%value%", args[3]));
+                }
+                catch (NumberFormatException e) {
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
+                }
             }
             if (args.length == 4 && args[2].equals("ambient")) {
-                world.setAmbientSpawnLimit(Integer.parseInt(args[3]));
-                sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.spawn-limits.ambient"))
-                        .replace("%world%", args[0]).replace("%value%", args[3]));
+                try {
+                    world.setAmbientSpawnLimit(Integer.parseInt(args[3]));
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.spawn-limits.ambient"))
+                            .replace("%world%", args[0]).replace("%value%", args[3]));
+                }
+                catch (NumberFormatException e) {
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
+                }
+            }
+            if (args.length == 4 && args[2].equals("water-animals")) {
+                try {
+                    world.setWaterAnimalSpawnLimit(Integer.parseInt(args[3]));
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.spawn-limits.water-animals"))
+                            .replace("%world%", args[0]).replace("%value%", args[3]));
+                }
+                catch (NumberFormatException e) {
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
+                }
+            }
+            if (args.length == 4 && args[2].equals("water-ambient")) {
+                try {
+                    world.setWaterAmbientSpawnLimit(Integer.parseInt(args[3]));
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.spawn-limits.water-ambient"))
+                            .replace("%world%", args[0]).replace("%value%", args[3]));
+                }
+                catch (NumberFormatException e) {
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
+                }
             }
             if (args.length == 2 && args[1].equals("world-profile")) {
                 for (String s : Main.getInstance().getConfig().getStringList("messages.world-profile")) {

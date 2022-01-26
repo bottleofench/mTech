@@ -48,7 +48,8 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
 
         if (args.length == 3 && args[1].equals("spawn-limit")) {
             List<String> settings = new ArrayList<>();
-            settings.add("monsters"); settings.add("animals"); settings.add("ambient");
+            settings.add("reset"); settings.add("monsters"); settings.add("animals"); settings.add("ambient");
+            settings.add("water-ambient"); settings.add("water-animals");
 
             List<String> result = new ArrayList<>();
             for (String b : settings) {
