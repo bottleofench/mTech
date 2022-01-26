@@ -2,6 +2,7 @@ package api.bottleofench.main;
 
 import com.sun.management.OperatingSystemMXBean;
 import org.bukkit.Bukkit;
+import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.command.CommandExecutor;
@@ -123,6 +124,17 @@ public class Command implements CommandExecutor {
                 }
                 else {
                     sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
+                }
+            }
+
+            if (args.length == 3 && args[1].equals("difficulty")) {
+                if (!Arrays.stream(Difficulty.values()).collect(Collectors.toList()).contains(Difficulty.valueOf(args[2]))) {
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
+                }
+                else {
+                    world.setDifficulty(Difficulty.valueOf(args[2]));
+                    sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.difficulty-value-change")
+                            .replace("%world%", args[0])));
                 }
             }
 

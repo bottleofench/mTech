@@ -1,6 +1,7 @@
 package api.bottleofench.main;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -36,7 +37,7 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
             List<String> settings = new ArrayList<>();
 
             settings.add("world-profile"); settings.add("spawn-limit"); settings.add("pvp");
-            settings.add("gamerule");
+            settings.add("gamerule"); settings.add("difficulty");
             List<String> result = new ArrayList<>();
             for (String b : settings) {
                 if (b.toLowerCase().startsWith(args[1].toLowerCase()))
@@ -53,6 +54,20 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
 
             List<String> result = new ArrayList<>();
             for (String b : settings) {
+                if (b.toLowerCase().startsWith(args[2].toLowerCase()))
+                    result.add(b);
+            }
+            return result;
+        }
+
+        if (args.length == 3 && args[1].equals("difficulty")) {
+            List<String> difficulties = new ArrayList<>();
+            for (Difficulty difficulty : Difficulty.values()) {
+                difficulties.add(difficulty.name());
+            }
+
+            List<String> result = new ArrayList<>();
+            for (String b : difficulties) {
                 if (b.toLowerCase().startsWith(args[2].toLowerCase()))
                     result.add(b);
             }
