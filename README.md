@@ -8,6 +8,4 @@ Features:
 - Getting the profile of the world. (Entities count, loaded chunks count, etc.)
 - Getting the profile of the server and system. (CPU usage, RAM usage, etc.)
 
-May not work with Spigot!
-
 (Translated from Russian using DeepL)
