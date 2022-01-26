@@ -1,5 +1,6 @@
 package api.bottleofench.main;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +20,7 @@ public final class Main extends JavaPlugin {
     }
 
     @Override
+    @SuppressWarnings("all")
     public void onEnable() {
         File config = new File(getDataFolder().getPath() + "/config.yml");
         if (!(config.exists()) || (config_version != getInstance().getConfig().getInt("config-version")) || (getInstance().getConfig().getString("config-version") == null)) {
@@ -27,12 +29,14 @@ public final class Main extends JavaPlugin {
         reloadConfig();
         getCommand("mtech").setExecutor(new Command());
         getCommand("mtech").setTabCompleter(new TabCompleter());
+
+        Bukkit.getLogger().info(Main.colorChat("&7[&6mTech&7] &aSuccessfully enabled!"));
     }
 
     @Override
-    public void onDisable() {}
+    public void onDisable() {Bukkit.getLogger().info(Main.colorChat("&7[&6mTech&7] &cSuccessfully disabled!"));}
 
-    public static String format (String str) {
+    public static String colorChat(String str) {
         return ChatColor.translateAlternateColorCodes('&', str);
     }
 }
