@@ -10,4 +10,6 @@ Building: Maven.
 Dependencies: none.
 May not work with Spigot!
 
+Builds available in [GitHub Actions](https://github.com/bottleofench/mTech/actions)
+
 (Translated from Russian using DeepL)

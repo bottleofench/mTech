@@ -18,7 +18,7 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
         if (!sender.hasPermission("mtech")) return null;
         if (args.length == 1) {
             List<String> worlds = new ArrayList<>();
-            worlds.add("reload");
+            worlds.add("reload"); worlds.add("server-profile");
             for (World world : Bukkit.getWorlds()) {
                 worlds.add(world.getName());
             }
@@ -32,7 +32,7 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
 
         }
 
-        if (args.length == 2) {
+        if (args.length == 2 && Bukkit.getWorlds().contains(Bukkit.getWorld(args[0]))) {
             List<String> settings = new ArrayList<>();
 
             settings.add("world-profile"); settings.add("spawn-limit"); settings.add("pvp");

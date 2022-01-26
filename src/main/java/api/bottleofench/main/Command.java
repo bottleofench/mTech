@@ -1,5 +1,6 @@
 package api.bottleofench.main;
 
+import com.sun.management.OperatingSystemMXBean;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.World;
@@ -10,6 +11,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.management.ManagementFactory;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +25,18 @@ public class Command implements CommandExecutor {
         if (args[0].equals("reload")) {
             Main.getInstance().reloadConfig();
             sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.reload")));
+        }
+        else if (args[0].equals("server-profile")) {
+            OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(
+                    OperatingSystemMXBean.class);
+            for (String s : Main.getInstance().getConfig().getStringList("messages.server-profile")) {
+                sender.sendMessage(Main.format(s)
+                        .replace("%tps%", String.valueOf(String.format("%.1f", Bukkit.getServer().getTPS()[0])).replace(",", "."))
+                        .replace("%os%", System.getProperty("os.name"))
+                        .replace("%ram_using%", String.valueOf((Runtime.getRuntime().maxMemory() - Runtime.getRuntime().freeMemory()) / 1000000))
+                        .replace("%ram_max%", String.valueOf(Runtime.getRuntime().maxMemory() / 1000000))
+                        .replace("%cpu_using%", String.valueOf((int) (osBean.getCpuLoad() * 100))));
+            }
         }
         else {
             if (!Bukkit.getWorlds().contains(Bukkit.getWorld(args[0]))) {
@@ -44,7 +60,6 @@ public class Command implements CommandExecutor {
                 sender.sendMessage(Main.format(Main.getInstance().getConfig().getString("messages.spawn-limits.ambient"))
                         .replace("%world%", args[0]).replace("%value%", args[3]));
             }
-
             if (args.length == 2 && args[1].equals("world-profile")) {
                 for (String s : Main.getInstance().getConfig().getStringList("messages.world-profile")) {
                     sender.sendMessage(Main.format(s).replace("%world%", args[0])
