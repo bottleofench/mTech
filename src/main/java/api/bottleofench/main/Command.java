@@ -1,10 +1,8 @@
 package api.bottleofench.main;
 
 import com.sun.management.OperatingSystemMXBean;
-import org.bukkit.Bukkit;
-import org.bukkit.Difficulty;
-import org.bukkit.GameRule;
-import org.bukkit.World;
+import com.sun.management.ThreadMXBean;
+import org.bukkit.*;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import java.lang.management.ManagementFactory;
@@ -24,7 +22,8 @@ public class Command implements CommandExecutor {
             Runtime runtime = Runtime.getRuntime();
             for (String s : Main.getInstance().getConfig().getStringList("messages.server-profile")) {
                 sender.sendMessage(Main.colorChat(s)
-                        .replace("%os%", System.getProperty("os.name"))
+                        .replace("%os%", osBean.getName())
+                        .replace("%arch%", osBean.getArch())
                         .replace("%ram_using%", String.valueOf((runtime.maxMemory() - runtime.freeMemory()) / 1048576))
                         .replace("%ram_max%", String.valueOf(runtime.maxMemory() / 1048576))
                         .replace("%cpu_using%", String.valueOf((int) (osBean.getCpuLoad() * 100))));

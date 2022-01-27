@@ -24,6 +24,7 @@ messages:
   server-profile:
     - "&6&lServer profile"
     - "&eOS: &f%os%"
+    - "&eArch: &f%arch%"
     - "&eRAM: &f%ram_using%MB / %ram_max%MB"
     - "&eCPU: &f%cpu_using%% / 100%"
   world-profile:
