@@ -22,7 +22,7 @@ public final class Main extends JavaPlugin {
     @Override
     @SuppressWarnings("all")
     public void onEnable() {
-        File config = new File(getDataFolder().getPath() + "/config.yml");
+        File config = new File(getDataFolder().getPath() + File.separator + "config.yml");
         if (!(config.exists()) || (config_version != getInstance().getConfig().getInt("config-version")) || (getInstance().getConfig().getString("config-version") == null)) {
             saveDefaultConfig();
         }
