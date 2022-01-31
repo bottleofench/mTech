@@ -10,7 +10,7 @@ import java.io.File;
 public final class Main extends JavaPlugin {
 
     private static JavaPlugin plugin;
-    private static final int config_version = 2;
+    private static final int config_version = 3;
 
     public Main() {
         plugin = this;
