@@ -12,7 +12,8 @@ public class Command implements CommandExecutor {
     @Override
     @SuppressWarnings("all")
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
-        if (args[0].equals("reload")) {
+        if (args.length == 0) sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
+        else if (args[0].equals("reload")) {
             Main.getInstance().reloadConfig();
             sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.reload")));
         }
