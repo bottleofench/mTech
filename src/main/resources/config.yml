@@ -23,10 +23,12 @@ messages:
     reset: "&aYou have successfully reset spawn limit in &f%world% &afor all mob types!"
   server-profile:
     - "&6&lServer profile"
+    - "&eServer core: &f%core%"
     - "&eOS: &f%os%"
     - "&eArch: &f%arch%"
     - "&eRAM: &f%ram_using%MB / %ram_max%MB"
     - "&eCPU: &f%cpu_using%% / 100%"
+    - "&eServer Uptime: &f%uptime% minutes"
   world-profile:
     - "&6&lWorld profile: &f%world%"
     - "&eEntity count: &f%entity_count%"

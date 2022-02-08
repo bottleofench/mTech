@@ -27,7 +27,9 @@ public class Command implements CommandExecutor {
                         .replace("%arch%", osBean.getArch())
                         .replace("%ram_using%", String.valueOf((runtime.maxMemory() - runtime.freeMemory()) / 1048576))
                         .replace("%ram_max%", String.valueOf(runtime.maxMemory() / 1048576))
-                        .replace("%cpu_using%", String.valueOf((int) (osBean.getCpuLoad() * 100))));
+                        .replace("%cpu_using%", String.valueOf((int) (osBean.getCpuLoad() * 100)))
+                        .replace("%core%",  Bukkit.getServer().getVersion())
+                        .replace("%uptime%", String.valueOf((System.currentTimeMillis() - Main.getLastStartTime()) / 1000 / 60)));
             }
         }
         else {

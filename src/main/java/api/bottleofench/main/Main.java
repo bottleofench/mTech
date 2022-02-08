@@ -9,6 +9,7 @@ import java.io.File;
 
 public final class Main extends JavaPlugin {
 
+    private static long LAST_START_TIME = 0L;
     private static JavaPlugin plugin;
     private static final int config_version = 3;
 
@@ -19,9 +20,15 @@ public final class Main extends JavaPlugin {
         return plugin;
     }
 
+    public static long getLastStartTime() {
+        return LAST_START_TIME;
+    }
+
     @Override
     @SuppressWarnings("all")
     public void onEnable() {
+        LAST_START_TIME = System.currentTimeMillis();
+
         File config = new File(getDataFolder().getPath() + File.separator + "config.yml");
         if (!(config.exists()) || (config_version != getInstance().getConfig().getInt("config-version")) || (getInstance().getConfig().getString("config-version") == null)) {
             saveDefaultConfig();
