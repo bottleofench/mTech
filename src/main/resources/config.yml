@@ -36,3 +36,5 @@ messages:
     - "&eView distance: &f%view_distance%"
     - "&eSimulation distance: &f%sim_distance%"
     - "&eLoaded chunks count: &f%loaded_chunks_count%"
+  cpu-overloaded: "&cCPU load more than 90%! Server is lagging!"
+  ram-clogged: "&cRAM usage is clogged! Please, clear the RAM or restart the server!"

@@ -1,11 +1,13 @@
 package api.bottleofench.main;
 
+import com.sun.management.OperatingSystemMXBean;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.lang.management.ManagementFactory;
 
 public final class Main extends JavaPlugin {
 
@@ -38,6 +40,20 @@ public final class Main extends JavaPlugin {
         getCommand("mtech").setTabCompleter(new TabCompleter());
 
         Bukkit.getLogger().info(Main.colorChat("&7[&6mTech&7] &aSuccessfully enabled!"));
+
+        Bukkit.getScheduler().runTaskTimer(getInstance(), () -> {
+            OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(
+                    OperatingSystemMXBean.class);
+            Runtime runtime = Runtime.getRuntime();
+
+            if ((osBean.getCpuLoad() * 100) > 90) {
+                Bukkit.getLogger().info(Main.getInstance().getConfig().getString("messages.cpu-overloaded").replace("&", "§"));
+            }
+            if (((runtime.maxMemory() - runtime.freeMemory()) / 1048576) >= ((runtime.maxMemory() / 1048576) - 100)) {
+                Bukkit.getLogger().info(Main.getInstance().getConfig().getString("messages.ram-clogged").replace("&", "§"));
+            }
+
+        },20,20);
     }
 
     @Override
