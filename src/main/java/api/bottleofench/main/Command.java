@@ -36,7 +36,9 @@ public class Command implements CommandExecutor {
                         .replace("%cpu_using%", String.valueOf((int) (osBean.getCpuLoad() * 100)))
                         .replace("%core%",  Bukkit.getServer().getVersion())
                         .replace("%uptime%", String.valueOf((System.currentTimeMillis() - Main.getLastStartTime()) / 1000 / 60))
-                        .replace("%loaded_chunks_count%", String.valueOf(chunks)));
+                        .replace("%loaded_chunks_count%", String.valueOf(chunks))
+                        .replace("%player_count%", String.valueOf(Bukkit.getOnlinePlayers().size()))
+                        .replace("%online-mode%", String.valueOf(Bukkit.getOnlineMode())));
             }
         }
         else {
