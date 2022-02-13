@@ -41,8 +41,7 @@ public class Command implements CommandExecutor {
                             .replace("%player_count%", String.valueOf(Bukkit.getOnlinePlayers().size()))
                             .replace("%online-mode%", String.valueOf(Bukkit.getOnlineMode()))).append("\n");
                 }
-
-                sender.sendMessage("Server profile: \n" + HastebinAPI.post(profile.toString(), false));
+                sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.hastebin.server-profile").replace("%link%", HastebinAPI.post(profile.toString(), false))));
             }
             else {
                 for (String s : Main.getInstance().getConfig().getStringList("messages.server-profile")) {
@@ -236,8 +235,7 @@ public class Command implements CommandExecutor {
                                 .replace("%sim_distance%", String.valueOf(world.getSimulationDistance())
                                 .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size()))))))).append("\n");
                     }
-
-                    sender.sendMessage("World profile: \n" + HastebinAPI.post(profile.toString(), false));
+                    sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.hastebin.world-profile").replace("%link%", HastebinAPI.post(profile.toString(), false))));
                 }
                 else {
                     for (String s : Main.getInstance().getConfig().getStringList("messages.world-profile")) {

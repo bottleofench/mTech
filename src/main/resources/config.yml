@@ -7,6 +7,9 @@ messages:
   gamerule-value-change: "&aThe game rule has been successfully changed for &f%world%!"
   difficulty-value-change: "&aThe difficulty has been successfully changed for &f%world%!"
   pvp-mode-change: "&aYou switched pvp mode to &f%value%"
+  hastebin:
+    world-profile: "&aWorld profile: \n&f%link%"
+    server-profile: "&aServer profile: \n&f%link%"
   ticks-per-mob-spawn:
     monsters: "&aYou have successfully set a ticks per monster spawns in &f%world% &ato &f%value%!"
     animals: "&aYou have successfully set a ticks per animal spawns in &f%world% &ato &f%value%!"
