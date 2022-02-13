@@ -1,4 +1,5 @@
 config-version: 3
+use-hastebin-for-profiles: false
 messages:
   reload: "&aConfiguration successfully reloaded!"
   command-error-syntax: "&cOops... Something went wrong.. Check the syntax of the command!"

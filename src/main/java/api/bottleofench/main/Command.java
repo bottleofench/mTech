@@ -1,7 +1,6 @@
 package api.bottleofench.main;
 
 import com.sun.management.OperatingSystemMXBean;
-import com.sun.management.ThreadMXBean;
 import org.bukkit.*;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -27,18 +26,38 @@ public class Command implements CommandExecutor {
                 chunks += w.getLoadedChunks().length;
             }
 
-            for (String s : Main.getInstance().getConfig().getStringList("messages.server-profile")) {
-                sender.sendMessage(Main.colorChat(s)
-                        .replace("%os%", osBean.getName())
-                        .replace("%arch%", osBean.getArch())
-                        .replace("%ram_using%", String.valueOf((runtime.maxMemory() - runtime.freeMemory()) / 1048576))
-                        .replace("%ram_max%", String.valueOf(runtime.maxMemory() / 1048576))
-                        .replace("%cpu_using%", String.valueOf((int) (osBean.getCpuLoad() * 100)))
-                        .replace("%core%",  Bukkit.getServer().getVersion())
-                        .replace("%uptime%", String.valueOf((System.currentTimeMillis() - Main.getLastStartTime()) / 1000 / 60))
-                        .replace("%loaded_chunks_count%", String.valueOf(chunks))
-                        .replace("%player_count%", String.valueOf(Bukkit.getOnlinePlayers().size()))
-                        .replace("%online-mode%", String.valueOf(Bukkit.getOnlineMode())));
+            if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
+                StringBuilder profile = new StringBuilder();
+                for (String s : Main.getInstance().getConfig().getStringList("messages.server-profile")) {
+                    profile.append(ChatColor.stripColor(Main.colorChat(s))
+                            .replace("%os%", osBean.getName())
+                            .replace("%arch%", osBean.getArch())
+                            .replace("%ram_using%", String.valueOf((runtime.maxMemory() - runtime.freeMemory()) / 1048576))
+                            .replace("%ram_max%", String.valueOf(runtime.maxMemory() / 1048576))
+                            .replace("%cpu_using%", String.valueOf((int) (osBean.getCpuLoad() * 100)))
+                            .replace("%core%",  Bukkit.getServer().getVersion())
+                            .replace("%uptime%", String.valueOf((System.currentTimeMillis() - Main.getLastStartTime()) / 1000 / 60))
+                            .replace("%loaded_chunks_count%", String.valueOf(chunks))
+                            .replace("%player_count%", String.valueOf(Bukkit.getOnlinePlayers().size()))
+                            .replace("%online-mode%", String.valueOf(Bukkit.getOnlineMode()))).append("\n");
+                }
+
+                sender.sendMessage("Server profile: \n" + HastebinAPI.post(profile.toString(), false));
+            }
+            else {
+                for (String s : Main.getInstance().getConfig().getStringList("messages.server-profile")) {
+                    sender.sendMessage(Main.colorChat(s)
+                            .replace("%os%", osBean.getName())
+                            .replace("%arch%", osBean.getArch())
+                            .replace("%ram_using%", String.valueOf((runtime.maxMemory() - runtime.freeMemory()) / 1048576))
+                            .replace("%ram_max%", String.valueOf(runtime.maxMemory() / 1048576))
+                            .replace("%cpu_using%", String.valueOf((int) (osBean.getCpuLoad() * 100)))
+                            .replace("%core%",  Bukkit.getServer().getVersion())
+                            .replace("%uptime%", String.valueOf((System.currentTimeMillis() - Main.getLastStartTime()) / 1000 / 60))
+                            .replace("%loaded_chunks_count%", String.valueOf(chunks))
+                            .replace("%player_count%", String.valueOf(Bukkit.getOnlinePlayers().size()))
+                            .replace("%online-mode%", String.valueOf(Bukkit.getOnlineMode())));
+                }
             }
         }
         else {
@@ -206,13 +225,30 @@ public class Command implements CommandExecutor {
                 }
             }
             if (args.length == 2 && args[1].equals("world-profile")) {
-                for (String s : Main.getInstance().getConfig().getStringList("messages.world-profile")) {
-                    sender.sendMessage(Main.colorChat(s).replace("%world%", args[0])
-                            .replace("%entity_count%", String.valueOf(world.getEntities().size()))
-                            .replace("%player_count%", String.valueOf(world.getPlayers().size()))
-                            .replace("%view_distance%", String.valueOf(world.getViewDistance()))
-                            .replace("%sim_distance%", String.valueOf(world.getSimulationDistance()))
-                            .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size())));
+                if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
+                    StringBuilder profile = new StringBuilder();
+                    for (String s : Main.getInstance().getConfig().getStringList("messages.world-profile")) {
+                        profile.append(ChatColor.stripColor(Main.colorChat(s))
+                                .replace("%world%", args[0])
+                                .replace("%entity_count%", String.valueOf(world.getEntities().size())
+                                .replace("%player_count%", String.valueOf(world.getPlayers().size())
+                                .replace("%view_distance%", String.valueOf(world.getViewDistance())
+                                .replace("%sim_distance%", String.valueOf(world.getSimulationDistance())
+                                .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size()))))))).append("\n");
+                    }
+
+                    sender.sendMessage("World profile: \n" + HastebinAPI.post(profile.toString(), false));
+                }
+                else {
+                    for (String s : Main.getInstance().getConfig().getStringList("messages.world-profile")) {
+                        sender.sendMessage(Main.colorChat(s)
+                                .replace("%world%", args[0])
+                                .replace("%entity_count%", String.valueOf(world.getEntities().size()))
+                                .replace("%player_count%", String.valueOf(world.getPlayers().size()))
+                                .replace("%view_distance%", String.valueOf(world.getViewDistance()))
+                                .replace("%sim_distance%", String.valueOf(world.getSimulationDistance()))
+                                .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size())));
+                    }
                 }
             }
 
