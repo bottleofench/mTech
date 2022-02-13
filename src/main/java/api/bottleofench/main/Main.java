@@ -56,7 +56,10 @@ public final class Main extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() {Bukkit.getLogger().info(Main.colorChat("&7[&6mTech&7] &cSuccessfully disabled!"));}
+    public void onDisable() {
+        getServer().getScheduler().cancelTasks(this);
+        Bukkit.getLogger().info(Main.colorChat("&7[&6mTech&7] &cSuccessfully disabled!"));
+    }
 
     public static String colorChat(String str) {
         return ChatColor.translateAlternateColorCodes('&', str);
