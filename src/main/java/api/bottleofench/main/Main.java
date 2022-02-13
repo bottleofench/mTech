@@ -52,7 +52,6 @@ public final class Main extends JavaPlugin {
             if (((runtime.maxMemory() - runtime.freeMemory()) / 1048576) >= ((runtime.maxMemory() / 1048576) - 100)) {
                 Bukkit.getLogger().info(Main.getInstance().getConfig().getString("messages.ram-clogged").replace("&", "§"));
             }
-
         },20,20);
     }
 

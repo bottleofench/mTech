@@ -29,6 +29,7 @@ messages:
     - "&eRAM: &f%ram_using%MB / %ram_max%MB"
     - "&eCPU: &f%cpu_using%% / 100%"
     - "&eServer Uptime: &f%uptime% minutes"
+    - "&eLoaded chunks count: &f%loaded_chunks_count%"
   world-profile:
     - "&6&lWorld profile: &f%world%"
     - "&eEntity count: &f%entity_count%"

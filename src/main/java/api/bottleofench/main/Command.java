@@ -21,6 +21,12 @@ public class Command implements CommandExecutor {
             OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(
                     OperatingSystemMXBean.class);
             Runtime runtime = Runtime.getRuntime();
+
+            int chunks = 0;
+            for (World w : Bukkit.getWorlds()) {
+                chunks += w.getLoadedChunks().length;
+            }
+
             for (String s : Main.getInstance().getConfig().getStringList("messages.server-profile")) {
                 sender.sendMessage(Main.colorChat(s)
                         .replace("%os%", osBean.getName())
@@ -29,7 +35,8 @@ public class Command implements CommandExecutor {
                         .replace("%ram_max%", String.valueOf(runtime.maxMemory() / 1048576))
                         .replace("%cpu_using%", String.valueOf((int) (osBean.getCpuLoad() * 100)))
                         .replace("%core%",  Bukkit.getServer().getVersion())
-                        .replace("%uptime%", String.valueOf((System.currentTimeMillis() - Main.getLastStartTime()) / 1000 / 60)));
+                        .replace("%uptime%", String.valueOf((System.currentTimeMillis() - Main.getLastStartTime()) / 1000 / 60))
+                        .replace("%loaded_chunks_count%", String.valueOf(chunks)));
             }
         }
         else {
