@@ -107,7 +107,7 @@ public class Command implements CommandExecutor {
                         }
                     }
                 }
-                if (args.length == 4 && args[1].equals("ticks-per-mob-spawn")) {
+                else if (args.length == 4 && args[1].equals("ticks-per-mob-spawn")) {
                     if (args[2].equals("monsters")) {
                         try {
                             world.setTicksPerMonsterSpawns(Integer.parseInt(args[3]));
@@ -169,7 +169,7 @@ public class Command implements CommandExecutor {
                         }
                     }
                 }
-                if (args.length == 4 && args[1].equals("spawn-limit")) {
+                else if (args.length == 4 && args[1].equals("spawn-limit")) {
                     if (args[2].equals("monsters")) {
                         try {
                             world.setMonsterSpawnLimit(Integer.parseInt(args[3]));
@@ -221,7 +221,7 @@ public class Command implements CommandExecutor {
                         }
                     }
                 }
-                if (args.length == 2 && args[1].equals("world-profile")) {
+                else if (args.length == 2 && args[1].equals("world-profile")) {
                     long tile_entity_count = 0L;
                     for (Chunk chunk : world.getLoadedChunks()) {
                         tile_entity_count += chunk.getTileEntities().length;
@@ -255,7 +255,7 @@ public class Command implements CommandExecutor {
                         }
                     }
                 }
-                if (args.length == 4 && args[1].equals("gamerule")) {
+                else if (args.length == 4 && args[1].equals("gamerule")) {
                     if (!Arrays.stream(GameRule.values()).toList().contains(GameRule.getByName(args[2]))) {
                         sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
                     }
