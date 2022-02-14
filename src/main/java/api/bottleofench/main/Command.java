@@ -11,10 +11,10 @@ public class Command implements CommandExecutor {
     @Override
     @SuppressWarnings("all")
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
-        if (args.length == 0) sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
+        if (args.length == 0) sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
         else if (args[0].equals("reload")) {
             Main.getInstance().reloadConfig();
-            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.reload")));
+            sender.sendMessage(Main.getColorString("messages.reload"));
         }
         else if (args[0].equals("server-profile")) {
             OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(
@@ -41,7 +41,7 @@ public class Command implements CommandExecutor {
                             .replace("%player_count%", String.valueOf(Bukkit.getOnlinePlayers().size()))
                             .replace("%online-mode%", String.valueOf(Bukkit.getOnlineMode()))).append("\n");
                 }
-                sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.hastebin.server-profile").replace("%link%", HastebinAPI.post(profile.toString()))));
+                sender.sendMessage(Main.getColorString("messages.hastebin.server-profile").replace("%link%", HastebinAPI.post(profile.toString())));
             }
             else {
                 for (String s : Main.getInstance().getConfig().getStringList("messages.server-profile")) {
@@ -61,7 +61,7 @@ public class Command implements CommandExecutor {
         }
         else {
             if (!Bukkit.getWorlds().contains(Bukkit.getWorld(args[0]))) {
-                sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.unknown-world-error")));
+                sender.sendMessage(Main.getColorString("messages.unknown-world-error"));
             }
             else {
                 World world = Bukkit.getWorld(args[0]);
@@ -73,7 +73,7 @@ public class Command implements CommandExecutor {
                         world.setWaterAnimalSpawnLimit(5);
                         world.setAmbientSpawnLimit(10);
                         world.setWaterAmbientSpawnLimit(5);
-                        sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.spawn-limits.reset"))
+                        sender.sendMessage(Main.getColorString("messages.spawn-limits.reset")
                                 .replace("%world%", args[0]));
                     }
                     if (args[2].equals("reset") && args[1].equals("ticks-per-mob-spawn")) {
@@ -83,16 +83,15 @@ public class Command implements CommandExecutor {
                         world.setTicksPerWaterUndergroundCreatureSpawns(1);
                         world.setTicksPerAmbientSpawns(1);
                         world.setTicksPerWaterAmbientSpawns(1);
-                        sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.ticks-per-mob-spawn.reset"))
+                        sender.sendMessage(Main.getColorString("messages.ticks-per-mob-spawn.reset")
                                 .replace("%world%", args[0]));
                     }
                     if (args[1].equals("difficulty")) {
                         if (!Arrays.stream(Difficulty.values()).toList().contains(Difficulty.valueOf(args[2]))) {
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
-                        }
-                        else {
+                            sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                        } else {
                             world.setDifficulty(Difficulty.valueOf(args[2]));
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.difficulty-value-change")
+                            sender.sendMessage(Main.colorChat(Main.getColorString("messages.difficulty-value-change")
                                     .replace("%world%", args[0])));
                         }
                     }
@@ -100,178 +99,160 @@ public class Command implements CommandExecutor {
                         if (args[2].equals("true") || args[2].equals("false")) {
                             boolean f = Boolean.getBoolean(args[2]);
                             world.setPVP(f);
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.pvp-mode-change")).replace("%value%", args[2]));
-                        }
-                        else {
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
+                            sender.sendMessage(Main.getColorString("messages.pvp-mode-change").replace("%value%", args[2]));
+                        } else {
+                            sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
                         }
                     }
-                }
-                else if (args.length == 4 && args[1].equals("ticks-per-mob-spawn")) {
+                } else if (args.length == 4 && args[1].equals("ticks-per-mob-spawn")) {
                     if (args[2].equals("monsters")) {
                         try {
                             world.setTicksPerMonsterSpawns(Integer.parseInt(args[3]));
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.ticks-per-mob-spawn.monsters"))
+                            sender.sendMessage(Main.getColorString("messages.ticks-per-mob-spawn.monsters")
                                     .replace("%world%", args[0]).replace("%value%", args[3]));
-                        }
-                        catch (NumberFormatException e) {
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
+                        } catch (NumberFormatException e) {
+                            sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
                         }
                     }
                     if (args[2].equals("animals")) {
                         try {
                             world.setTicksPerAnimalSpawns(Integer.parseInt(args[3]));
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.ticks-per-mob-spawn.animals"))
+                            sender.sendMessage(Main.getColorString("messages.ticks-per-mob-spawn.animals")
                                     .replace("%world%", args[0]).replace("%value%", args[3]));
-                        }
-                        catch (NumberFormatException e) {
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
+                        } catch (NumberFormatException e) {
+                            sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
                         }
                     }
                     if (args[2].equals("ambient")) {
                         try {
                             world.setTicksPerAmbientSpawns(Integer.parseInt(args[3]));
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.ticks-per-mob-spawn.ambient"))
+                            sender.sendMessage(("messages.ticks-per-mob-spawn.ambient")
                                     .replace("%world%", args[0]).replace("%value%", args[3]));
+                        } catch (NumberFormatException e) {
+                            sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+
                         }
-                        catch (NumberFormatException e) {
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
+                        if (args[2].equals("water-ambient")) {
+                            try {
+                                world.setTicksPerWaterAmbientSpawns(Integer.parseInt(args[3]));
+                                sender.sendMessage(Main.getColorString("messages.ticks-per-mob-spawn.water-animals")
+                                        .replace("%world%", args[0]).replace("%value%", args[3]));
+                            } catch (NumberFormatException e) {
+                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                            }
                         }
+                        if (args[2].equals("water")) {
+                            try {
+                                world.setTicksPerWaterSpawns(Integer.parseInt(args[3]));
+                                sender.sendMessage(Main.getColorString("messages.ticks-per-mob-spawn.water-ambient")
+                                        .replace("%world%", args[0]).replace("%value%", args[3]));
+                            } catch (NumberFormatException e) {
+                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                            }
+                        }
+                        if (args[2].equals("underground-creature-spawns")) {
+                            try {
+                                world.setTicksPerWaterUndergroundCreatureSpawns(Integer.parseInt(args[3]));
+                                sender.sendMessage(Main.getColorString("messages.ticks-per-mob-spawn.water-ambient")
+                                        .replace("%world%", args[0]).replace("%value%", args[3]));
+                            } catch (NumberFormatException e) {
+                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                            }
+                        }
+                    } else if (args.length == 4 && args[1].equals("spawn-limit")) {
+                        if (args[2].equals("monsters")) {
+                            try {
+                                world.setMonsterSpawnLimit(Integer.parseInt(args[3]));
+                                sender.sendMessage(Main.getColorString("messages.spawn-limits.monsters")
+                                        .replace("%world%", args[0]).replace("%value%", args[3]));
+                            } catch (NumberFormatException e) {
+                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                            }
+                        }
+                        if (args[2].equals("animals")) {
+                            try {
+                                world.setAnimalSpawnLimit(Integer.parseInt(args[3]));
+                                sender.sendMessage(Main.getColorString("messages.spawn-limits.animals")
+                                        .replace("%world%", args[0]).replace("%value%", args[3]));
+                            } catch (NumberFormatException e) {
+                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                            }
+                        }
+                        if (args[2].equals("ambient")) {
+                            try {
+                                world.setAmbientSpawnLimit(Integer.parseInt(args[3]));
+                                sender.sendMessage(Main.getColorString("messages.spawn-limits.ambient")
+                                        .replace("%world%", args[0]).replace("%value%", args[3]));
+                            } catch (NumberFormatException e) {
+                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                            }
+                        }
+                        if (args[2].equals("water-animals")) {
+                            try {
+                                world.setWaterAnimalSpawnLimit(Integer.parseInt(args[3]));
+                                sender.sendMessage(Main.getColorString("messages.spawn-limits.water-animals")
+                                        .replace("%world%", args[0]).replace("%value%", args[3]));
+                            } catch (NumberFormatException e) {
+                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                            }
+                        }
+                        if (args[2].equals("water-ambient")) {
+                            try {
+                                world.setWaterAmbientSpawnLimit(Integer.parseInt(args[3]));
+                                sender.sendMessage(Main.getColorString("messages.spawn-limits.water-ambient")
+                                        .replace("%world%", args[0]).replace("%value%", args[3]));
+                            } catch (NumberFormatException e) {
+                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                            }
+                        }
+                    } else if (args.length == 2 && args[1].equals("world-profile")) {
+                        long tile_entity_count = 0L;
+                        for (Chunk chunk : world.getLoadedChunks()) {
+                            tile_entity_count += chunk.getTileEntities().length;
+                        }
+                        if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
+                            StringBuilder profile = new StringBuilder();
+                            for (String s : Main.getInstance().getConfig().getStringList("messages.world-profile")) {
+                                profile.append(ChatColor.stripColor(Main.colorChat(s))
+                                        .replace("%world%", args[0])
+                                        .replace("%entity_count%", String.valueOf(world.getEntities().size()))
+                                        .replace("%player_count%", String.valueOf(world.getPlayers().size()))
+                                        .replace("%view_distance%", String.valueOf(world.getViewDistance()))
+                                        .replace("%sim_distance%", String.valueOf(world.getSimulationDistance()))
+                                        .replace("%living_entity_count%", String.valueOf(world.getLivingEntities().size()))
+                                        .replace("%tile_entity_count%", String.valueOf(tile_entity_count))
+                                        .replace("%worldborder%", String.valueOf(world.getWorldBorder().getSize()))
+                                        .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size()))).append("\n");
+                            }
+                            sender.sendMessage(Main.getColorString("messages.hastebin.world-profile").replace("%link%", HastebinAPI.post(profile.toString())));
+                        } else {
+                            for (String s : Main.getInstance().getConfig().getStringList("messages.world-profile")) {
+                                sender.sendMessage(Main.colorChat(s)
+                                        .replace("%world%", args[0])
+                                        .replace("%entity_count%", String.valueOf(world.getEntities().size()))
+                                        .replace("%player_count%", String.valueOf(world.getPlayers().size()))
+                                        .replace("%view_distance%", String.valueOf(world.getViewDistance()))
+                                        .replace("%sim_distance%", String.valueOf(world.getSimulationDistance()))
+                                        .replace("%living_entity_count%", String.valueOf(world.getLivingEntities().size()))
+                                        .replace("%tile_entity_count%", String.valueOf(tile_entity_count))
+                                        .replace("%worldborder%", String.valueOf(world.getWorldBorder().getSize()))
+                                        .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size())));
+                            }
+                        }
+                    } else if (args.length == 4 && args[1].equals("gamerule")) {
+                        if (!Arrays.stream(GameRule.values()).toList().contains(GameRule.getByName(args[2]))) {
+                            sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                        }
+                        if (!(args[3].equals("true") || args[3].equals("false") || args[3].matches("-?\\d+(\\.\\d+)?"))) {
+                            sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                        } else {
+                            world.setGameRuleValue(args[2], args[3]);
+                            sender.sendMessage(Main.getColorString("messages.gamerule-value-change")
+                                    .replace("%world%", args[0]));
+                        }
+                    } else {
+                        sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
                     }
-                    if (args[2].equals("water-ambient")) {
-                        try {
-                            world.setTicksPerWaterAmbientSpawns(Integer.parseInt(args[3]));
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.ticks-per-mob-spawn.water-animals"))
-                                    .replace("%world%", args[0]).replace("%value%", args[3]));
-                        }
-                        catch (NumberFormatException e) {
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
-                        }
-                    }
-                    if (args[2].equals("water")) {
-                        try {
-                            world.setTicksPerWaterSpawns(Integer.parseInt(args[3]));
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.ticks-per-mob-spawn.water-ambient"))
-                                    .replace("%world%", args[0]).replace("%value%", args[3]));
-                        }
-                        catch (NumberFormatException e) {
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
-                        }
-                    }
-                    if (args[2].equals("underground-creature-spawns")) {
-                        try {
-                            world.setTicksPerWaterUndergroundCreatureSpawns(Integer.parseInt(args[3]));
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.ticks-per-mob-spawn.water-ambient"))
-                                    .replace("%world%", args[0]).replace("%value%", args[3]));
-                        }
-                        catch (NumberFormatException e) {
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
-                        }
-                    }
-                }
-                else if (args.length == 4 && args[1].equals("spawn-limit")) {
-                    if (args[2].equals("monsters")) {
-                        try {
-                            world.setMonsterSpawnLimit(Integer.parseInt(args[3]));
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.spawn-limits.monsters"))
-                                    .replace("%world%", args[0]).replace("%value%", args[3]));
-                        }
-                        catch (NumberFormatException e) {
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
-                        }
-                    }
-                    if (args[2].equals("animals")) {
-                        try {
-                            world.setAnimalSpawnLimit(Integer.parseInt(args[3]));
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.spawn-limits.animals"))
-                                    .replace("%world%", args[0]).replace("%value%", args[3]));
-                        }
-                        catch (NumberFormatException e) {
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
-                        }
-                    }
-                    if (args[2].equals("ambient")) {
-                        try {
-                            world.setAmbientSpawnLimit(Integer.parseInt(args[3]));
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.spawn-limits.ambient"))
-                                    .replace("%world%", args[0]).replace("%value%", args[3]));
-                        }
-                        catch (NumberFormatException e) {
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
-                        }
-                    }
-                    if (args[2].equals("water-animals")) {
-                        try {
-                            world.setWaterAnimalSpawnLimit(Integer.parseInt(args[3]));
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.spawn-limits.water-animals"))
-                                    .replace("%world%", args[0]).replace("%value%", args[3]));
-                        }
-                        catch (NumberFormatException e) {
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
-                        }
-                    }
-                    if (args[2].equals("water-ambient")) {
-                        try {
-                            world.setWaterAmbientSpawnLimit(Integer.parseInt(args[3]));
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.spawn-limits.water-ambient"))
-                                    .replace("%world%", args[0]).replace("%value%", args[3]));
-                        }
-                        catch (NumberFormatException e) {
-                            sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
-                        }
-                    }
-                }
-                else if (args.length == 2 && args[1].equals("world-profile")) {
-                    long tile_entity_count = 0L;
-                    for (Chunk chunk : world.getLoadedChunks()) {
-                        tile_entity_count += chunk.getTileEntities().length;
-                    }
-                    if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
-                        StringBuilder profile = new StringBuilder();
-                        for (String s : Main.getInstance().getConfig().getStringList("messages.world-profile")) {
-                            profile.append(ChatColor.stripColor(Main.colorChat(s))
-                                    .replace("%world%", args[0])
-                                    .replace("%entity_count%", String.valueOf(world.getEntities().size()))
-                                    .replace("%player_count%", String.valueOf(world.getPlayers().size()))
-                                    .replace("%view_distance%", String.valueOf(world.getViewDistance()))
-                                    .replace("%sim_distance%", String.valueOf(world.getSimulationDistance()))
-                                    .replace("%living_entity_count%", String.valueOf(world.getLivingEntities().size()))
-                                    .replace("%tile_entity_count%", String.valueOf(tile_entity_count))
-                                    .replace("%worldborder%", String.valueOf(world.getWorldBorder().getSize()))
-                                    .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size()))).append("\n");
-                        }
-                        sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.hastebin.world-profile").replace("%link%", HastebinAPI.post(profile.toString()))));
-                    }
-                    else {
-                        for (String s : Main.getInstance().getConfig().getStringList("messages.world-profile")) {
-                            sender.sendMessage(Main.colorChat(s)
-                                    .replace("%world%", args[0])
-                                    .replace("%entity_count%", String.valueOf(world.getEntities().size()))
-                                    .replace("%player_count%", String.valueOf(world.getPlayers().size()))
-                                    .replace("%view_distance%", String.valueOf(world.getViewDistance()))
-                                    .replace("%sim_distance%", String.valueOf(world.getSimulationDistance()))
-                                    .replace("%living_entity_count%", String.valueOf(world.getLivingEntities().size()))
-                                    .replace("%tile_entity_count%", String.valueOf(tile_entity_count))
-                                    .replace("%worldborder%", String.valueOf(world.getWorldBorder().getSize()))
-                                    .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size())));
-                        }
-                    }
-                }
-                else if (args.length == 4 && args[1].equals("gamerule")) {
-                    if (!Arrays.stream(GameRule.values()).toList().contains(GameRule.getByName(args[2]))) {
-                        sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
-                    }
-                    if (!(args[3].equals("true") || args[3].equals("false") || args[3].matches("-?\\d+(\\.\\d+)?"))) {
-                        sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
-                    }
-                    else {
-                        world.setGameRuleValue(args[2], args[3]);
-                        sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.gamerule-value-change")
-                                .replace("%world%", args[0])));
-                    }
-                }
-                else {
-                    sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.command-error-syntax")));
                 }
             }
         }

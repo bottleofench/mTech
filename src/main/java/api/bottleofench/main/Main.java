@@ -14,14 +14,12 @@ public final class Main extends JavaPlugin {
     private static long LAST_START_TIME = 0L;
     private static JavaPlugin plugin;
     private static final int config_version = 3;
-
     public Main() {
         plugin = this;
     }
     public static Plugin getInstance() {
         return plugin;
     }
-
     public static long getLastStartTime() {
         return LAST_START_TIME;
     }
@@ -47,10 +45,12 @@ public final class Main extends JavaPlugin {
             Runtime runtime = Runtime.getRuntime();
 
             if ((osBean.getCpuLoad() * 100) > 90) {
-                Bukkit.getLogger().info(Main.getInstance().getConfig().getString("messages.cpu-overloaded").replace("&", "§"));
+                Bukkit.getLogger().info(Main.getColorString("messages.cpu-overloaded"));
             }
-            if (((runtime.maxMemory() - runtime.freeMemory()) / 1048576) >= ((runtime.maxMemory() / 1048576) - 100)) {
-                Bukkit.getLogger().info(Main.getInstance().getConfig().getString("messages.ram-clogged").replace("&", "§"));
+            long ram = (runtime.maxMemory() - runtime.freeMemory()) / 1048576;
+            long clogged_ram_value = (runtime.maxMemory() / 1048576) - 100;
+            if (ram >= clogged_ram_value) {
+                Bukkit.getLogger().info(Main.getColorString("messages.ram-clogged"));
             }
         },20,20);
     }
@@ -59,6 +59,10 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
         getServer().getScheduler().cancelTasks(this);
         Bukkit.getLogger().info(Main.colorChat("&7[&6mTech&7] &cSuccessfully disabled!"));
+    }
+
+    public static String getColorString(String str) {
+        return ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString(str));
     }
 
     public static String colorChat(String str) {
