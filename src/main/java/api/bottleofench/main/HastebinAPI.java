@@ -10,24 +10,22 @@ import java.nio.charset.StandardCharsets;
 
 public class HastebinAPI {
 
-    public static String post(String text, boolean raw) {
+    public static String post(String text) {
         try {
             byte[] postData = text.getBytes(StandardCharsets.UTF_8);
             int postDataLength = postData.length;
-            String requestURL = "https://www.toptal.com/developers/hastebin/documents";
-            URL url = new URL(requestURL);
+            URL url = new URL("https://www.toptal.com/developers/hastebin/documents");
             HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setInstanceFollowRedirects(false);
             conn.setRequestMethod("POST");
             conn.setRequestProperty("User-Agent", "Hastebin Java Api");
-            conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+            conn.setRequestProperty("Content-Length", "" + postDataLength);
             conn.setUseCaches(false);
 
             String response = null;
-            DataOutputStream wr;
             try {
-                wr = new DataOutputStream(conn.getOutputStream());
+                DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
                 wr.write(postData);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 response = reader.readLine();
@@ -35,14 +33,12 @@ public class HastebinAPI {
                 e.printStackTrace();
             }
 
+            String postURL = null;
             if (response.contains("\"key\"")) {
                 response = response.substring(response.indexOf(":") + 2, response.length() - 2);
-
-                String postURL = raw ? "https://www.toptal.com/developers/hastebin/raw/" : "https://www.toptal.com/developers/hastebin/";
-                response = postURL + response;
+                postURL = "https://www.toptal.com/developers/hastebin/" + response;
             }
-
-            return response;
+            return postURL;
         }
         catch (Exception exception) {
             exception.printStackTrace();
