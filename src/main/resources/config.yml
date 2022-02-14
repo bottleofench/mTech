@@ -26,7 +26,7 @@ messages:
     water-ambient: "&aYou have successfully set an ambient spawn limit in &f%world% &ato &f%value%!"
     reset: "&aYou have successfully reset spawn limit in &f%world% &afor all mob types!"
   server-profile:
-    - "&6&lServer profile"
+    - "\n&6&lServer profile"
     - "&eServer core: &f%core%"
     - "&eOS: &f%os%"
     - "&eArch: &f%arch%"
@@ -37,7 +37,7 @@ messages:
     - "&ePlayer count: &f%player_count%"
     - "&eLoaded chunks count: &f%loaded_chunks_count%"
   world-profile:
-    - "&6&lWorld profile: &f%world%"
+    - "\n&6&lWorld profile: &f%world%"
     - "&eEntities count: &f%entity_count%"
     - "&eLivingEntity count: &f%living_entity_count%"
     - "&eTileEntity count: &f%tile_entity_count%"

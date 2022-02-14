@@ -231,13 +231,13 @@ public class Command implements CommandExecutor {
                         for (String s : Main.getInstance().getConfig().getStringList("messages.world-profile")) {
                             profile.append(ChatColor.stripColor(Main.colorChat(s))
                                     .replace("%world%", args[0])
-                                    .replace("%entity_count%", String.valueOf(world.getEntities().size())
-                                            .replace("%player_count%", String.valueOf(world.getPlayers().size())
-                                                    .replace("%view_distance%", String.valueOf(world.getViewDistance())
-                                                            .replace("%sim_distance%", String.valueOf(world.getSimulationDistance())
-                                                                    .replace("%living_entity_count%", String.valueOf(world.getLivingEntities().size())
-                                                                            .replace("%tile_entity_count%", String.valueOf(tile_entity_count)
-                                                                                    .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size()))))))))).append("\n");
+                                    .replace("%entity_count%", String.valueOf(world.getEntities().size()))
+                                    .replace("%player_count%", String.valueOf(world.getPlayers().size()))
+                                    .replace("%view_distance%", String.valueOf(world.getViewDistance()))
+                                    .replace("%sim_distance%", String.valueOf(world.getSimulationDistance()))
+                                    .replace("%living_entity_count%", String.valueOf(world.getLivingEntities().size()))
+                                    .replace("%tile_entity_count%", String.valueOf(tile_entity_count))
+                                    .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size()))).append("\n");
                         }
                         sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.hastebin.world-profile").replace("%link%", HastebinAPI.post(profile.toString(), false))));
                     }
@@ -249,9 +249,9 @@ public class Command implements CommandExecutor {
                                     .replace("%player_count%", String.valueOf(world.getPlayers().size()))
                                     .replace("%view_distance%", String.valueOf(world.getViewDistance()))
                                     .replace("%sim_distance%", String.valueOf(world.getSimulationDistance()))
-                                    .replace("%living_entity_count%", String.valueOf(world.getLivingEntities().size())
-                                            .replace("%tile_entity_count%", String.valueOf(tile_entity_count)
-                                                    .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size())))));
+                                    .replace("%living_entity_count%", String.valueOf(world.getLivingEntities().size()))
+                                    .replace("%tile_entity_count%", String.valueOf(tile_entity_count))
+                                    .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size())));
                         }
                     }
                 }
