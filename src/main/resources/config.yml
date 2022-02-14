@@ -43,6 +43,7 @@ messages:
     - "&eTileEntity count: &f%tile_entity_count%"
     - "&ePlayer count: &f%player_count%"
     - "&eView distance: &f%view_distance%"
+    - "&eWorldborder size: &f%worldborder%"
     - "&eSimulation distance: &f%sim_distance%"
     - "&eLoaded chunks count: &f%loaded_chunks_count%"
   cpu-overloaded: "&cCPU load more than 90%! Server is lagging!"

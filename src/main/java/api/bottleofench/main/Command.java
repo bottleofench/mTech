@@ -237,6 +237,7 @@ public class Command implements CommandExecutor {
                                     .replace("%sim_distance%", String.valueOf(world.getSimulationDistance()))
                                     .replace("%living_entity_count%", String.valueOf(world.getLivingEntities().size()))
                                     .replace("%tile_entity_count%", String.valueOf(tile_entity_count))
+                                    .replace("%worldborder%", String.valueOf(world.getWorldBorder().getSize()))
                                     .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size()))).append("\n");
                         }
                         sender.sendMessage(Main.colorChat(Main.getInstance().getConfig().getString("messages.hastebin.world-profile").replace("%link%", HastebinAPI.post(profile.toString(), false))));
@@ -251,6 +252,7 @@ public class Command implements CommandExecutor {
                                     .replace("%sim_distance%", String.valueOf(world.getSimulationDistance()))
                                     .replace("%living_entity_count%", String.valueOf(world.getLivingEntities().size()))
                                     .replace("%tile_entity_count%", String.valueOf(tile_entity_count))
+                                    .replace("%worldborder%", String.valueOf(world.getWorldBorder().getSize()))
                                     .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size())));
                         }
                     }
