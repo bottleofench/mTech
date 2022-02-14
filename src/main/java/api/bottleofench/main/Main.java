@@ -40,17 +40,19 @@ public final class Main extends JavaPlugin {
         Bukkit.getLogger().info(Main.colorChat("&7[&6mTech&7] &aSuccessfully enabled!"));
 
         Bukkit.getScheduler().runTaskTimer(getInstance(), () -> {
-            OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(
-                    OperatingSystemMXBean.class);
-            Runtime runtime = Runtime.getRuntime();
+            if (Main.getInstance().getConfig().getBoolean("enable-warnings")) {
+                OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(
+                        OperatingSystemMXBean.class);
+                Runtime runtime = Runtime.getRuntime();
 
-            if ((osBean.getCpuLoad() * 100) > 90) {
-                Bukkit.getLogger().info(Main.getColorString("messages.cpu-overloaded"));
-            }
-            long ram = (runtime.maxMemory() - runtime.freeMemory()) / 1048576;
-            long clogged_ram_value = (runtime.maxMemory() / 1048576) - 100;
-            if (ram >= clogged_ram_value) {
-                Bukkit.getLogger().info(Main.getColorString("messages.ram-clogged"));
+                if ((osBean.getCpuLoad() * 100) > 90) {
+                    Bukkit.getLogger().info(Main.getColorString("messages.cpu-overloaded"));
+                }
+                long ram = (runtime.maxMemory() - runtime.freeMemory()) / 1048576;
+                long clogged_ram_value = (runtime.maxMemory() / 1048576) - 100;
+                if (ram >= clogged_ram_value) {
+                    Bukkit.getLogger().info(Main.getColorString("messages.ram-clogged"));
+                }
             }
         },20,20);
     }
