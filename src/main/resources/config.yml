@@ -38,7 +38,9 @@ messages:
     - "&eLoaded chunks count: &f%loaded_chunks_count%"
   world-profile:
     - "&6&lWorld profile: &f%world%"
-    - "&eEntity count: &f%entity_count%"
+    - "&eEntities count: &f%entity_count%"
+    - "&eLivingEntity count: &f%living_entity_count%"
+    - "&eTileEntity count: &f%tile_entity_count%"
     - "&ePlayer count: &f%player_count%"
     - "&eView distance: &f%view_distance%"
     - "&eSimulation distance: &f%sim_distance%"
