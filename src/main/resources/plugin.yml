@@ -6,10 +6,28 @@ authors: [ bottleofench ]
 
 commands:
   mtech:
-    permission: mtech
     aliases:
       - tech
 
 permissions:
   mtech:
     default: op
+    children:
+      server-profile:
+        default: op
+      reload:
+        default: op
+      world:
+        children:
+          world-profile:
+            default: op
+          gamerule:
+            default: op
+          difficulty:
+            default: op
+          pvp:
+            default: op
+          spawn-limit:
+            default: op
+          ticks-per-mob-spawn:
+            default: op
