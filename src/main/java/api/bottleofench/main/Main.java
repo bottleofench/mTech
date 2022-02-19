@@ -13,7 +13,6 @@ public final class Main extends JavaPlugin {
 
     private static long LAST_START_TIME = 0L;
     private static JavaPlugin plugin;
-    private static final int config_version = 3;
     public Main() {
         plugin = this;
     }
@@ -30,12 +29,15 @@ public final class Main extends JavaPlugin {
         LAST_START_TIME = System.currentTimeMillis();
 
         File config = new File(getDataFolder().getPath() + File.separator + "config.yml");
-        if (!(config.exists()) || (config_version != getInstance().getConfig().getInt("config-version")) || (getInstance().getConfig().getString("config-version") == null)) {
+        if (!config.exists()) {
             saveDefaultConfig();
         }
+
         reloadConfig();
         getCommand("mtech").setExecutor(new Command());
         getCommand("mtech").setTabCompleter(new TabCompleter());
+
+        new LanguageManager();
 
         Bukkit.getLogger().info(Main.colorChat("&7[&6mTech&7] &aSuccessfully enabled!"));
 
@@ -46,12 +48,12 @@ public final class Main extends JavaPlugin {
                 Runtime runtime = Runtime.getRuntime();
 
                 if ((osBean.getCpuLoad() * 100) > 90) {
-                    Bukkit.getLogger().info(Main.getColorString("messages.cpu-overloaded"));
+                    Bukkit.getLogger().info(Main.getColorString("cpu-overloaded"));
                 }
                 long ram = (runtime.maxMemory() - runtime.freeMemory()) / 1048576;
                 long clogged_ram_value = (runtime.maxMemory() / 1048576) - 100;
                 if (ram >= clogged_ram_value) {
-                    Bukkit.getLogger().info(Main.getColorString("messages.ram-clogged"));
+                    Bukkit.getLogger().info(Main.getColorString("ram-clogged"));
                 }
             }
         },20,20);
@@ -64,7 +66,7 @@ public final class Main extends JavaPlugin {
     }
 
     public static String getColorString(String str) {
-        return ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString(str));
+        return ChatColor.translateAlternateColorCodes('&', LanguageManager.get(str));
     }
 
     public static String colorChat(String str) {

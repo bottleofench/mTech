@@ -11,14 +11,15 @@ public class Command implements CommandExecutor {
     @Override
     @SuppressWarnings("all")
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
-        if (args.length == 0) sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+        if (args.length == 0) sender.sendMessage(Main.getColorString("command-error-syntax"));
         else if (args[0].equals("reload") && sender.hasPermission("mtech.reload")) {
             if (sender.hasPermission("mtech.reload")) {
                 Main.getInstance().reloadConfig();
-                sender.sendMessage(Main.getColorString("messages.reload"));
+                new LanguageManager();
+                sender.sendMessage(Main.getColorString("reload"));
             }
             else {
-                sender.sendMessage(Main.getColorString("messages.no-permissions"));
+                sender.sendMessage(Main.getColorString("no-permissions"));
             }
         }
         else if (args[0].equals("server-profile")) {
@@ -34,7 +35,7 @@ public class Command implements CommandExecutor {
 
                 if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
                     StringBuilder profile = new StringBuilder();
-                    for (String s : Main.getInstance().getConfig().getStringList("messages.server-profile")) {
+                    for (String s : LanguageManager.getStringList("server-profile")) {
                         profile.append(ChatColor.stripColor(Main.colorChat(s))
                                 .replace("%os%", osBean.getName())
                                 .replace("%arch%", osBean.getArch())
@@ -47,10 +48,10 @@ public class Command implements CommandExecutor {
                                 .replace("%player_count%", String.valueOf(Bukkit.getOnlinePlayers().size()))
                                 .replace("%online-mode%", String.valueOf(Bukkit.getOnlineMode()))).append("\n");
                     }
-                    sender.sendMessage(Main.getColorString("messages.hastebin.server-profile").replace("%link%", HastebinAPI.post(profile.toString())));
+                    sender.sendMessage(Main.getColorString("hastebin.server-profile").replace("%link%", HastebinAPI.post(profile.toString())));
                 }
                 else {
-                    for (String s : Main.getInstance().getConfig().getStringList("messages.server-profile")) {
+                    for (String s : LanguageManager.getStringList("server-profile")) {
                         sender.sendMessage(Main.colorChat(s)
                                 .replace("%os%", osBean.getName())
                                 .replace("%arch%", osBean.getArch())
@@ -66,12 +67,12 @@ public class Command implements CommandExecutor {
                 }
             }
             else {
-                sender.sendMessage(Main.getColorString("messages.no-permissions"));
+                sender.sendMessage(Main.getColorString("no-permissions"));
             }
         }
         else {
             if (!Bukkit.getWorlds().contains(Bukkit.getWorld(args[0]))) {
-                sender.sendMessage(Main.getColorString("messages.unknown-world-error"));
+                sender.sendMessage(Main.getColorString("unknown-world-error"));
             }
             else {
                 World world = Bukkit.getWorld(args[0]);
@@ -84,11 +85,11 @@ public class Command implements CommandExecutor {
                             world.setWaterAnimalSpawnLimit(5);
                             world.setAmbientSpawnLimit(10);
                             world.setWaterAmbientSpawnLimit(5);
-                            sender.sendMessage(Main.getColorString("messages.spawn-limits.reset")
+                            sender.sendMessage(Main.getColorString("spawn-limits.reset")
                                     .replace("%world%", args[0]));
                         }
                         else {
-                            sender.sendMessage(Main.getColorString("messages.no-permissions"));
+                            sender.sendMessage(Main.getColorString("no-permissions"));
                         }
                     }
                     if (args[2].equals("reset") && args[1].equals("ticks-per-mob-spawn")) {
@@ -99,25 +100,25 @@ public class Command implements CommandExecutor {
                             world.setTicksPerWaterUndergroundCreatureSpawns(1);
                             world.setTicksPerAmbientSpawns(1);
                             world.setTicksPerWaterAmbientSpawns(1);
-                            sender.sendMessage(Main.getColorString("messages.ticks-per-mob-spawn.reset")
+                            sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.reset")
                                     .replace("%world%", args[0]));
                         }
                         else {
-                            sender.sendMessage(Main.getColorString("messages.no-permissions"));
+                            sender.sendMessage(Main.getColorString("no-permissions"));
                         }
                     }
                     if (args[1].equals("difficulty")) {
                         if (sender.hasPermission("mtech.world.difficulty")) {
                             if (!Arrays.stream(Difficulty.values()).toList().contains(Difficulty.valueOf(args[2]))) {
-                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                                sender.sendMessage(Main.getColorString("command-error-syntax"));
                             } else {
                                 world.setDifficulty(Difficulty.valueOf(args[2]));
-                                sender.sendMessage(Main.colorChat(Main.getColorString("messages.difficulty-value-change")
+                                sender.sendMessage(Main.colorChat(Main.getColorString("difficulty-value-change")
                                         .replace("%world%", args[0])));
                             }
                         }
                         else {
-                            sender.sendMessage(Main.getColorString("messages.no-permissions"));
+                            sender.sendMessage(Main.getColorString("no-permissions"));
                         }
                     }
                     if (args[1].equals("pvp")) {
@@ -125,9 +126,9 @@ public class Command implements CommandExecutor {
                             if (args[2].equals("true") || args[2].equals("false")) {
                                 boolean f = Boolean.getBoolean(args[2]);
                                 world.setPVP(f);
-                                sender.sendMessage(Main.getColorString("messages.pvp-mode-change").replace("%value%", args[2]));
+                                sender.sendMessage(Main.getColorString("pvp-mode-change").replace("%value%", args[2]));
                             } else {
-                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                                sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
                     }
@@ -137,61 +138,61 @@ public class Command implements CommandExecutor {
                         if (args[2].equals("monsters")) {
                             try {
                                 world.setTicksPerMonsterSpawns(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("messages.ticks-per-mob-spawn.monsters")
+                                sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.monsters")
                                         .replace("%world%", args[0]).replace("%value%", args[3]));
                             } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                                sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
                         if (args[2].equals("animals")) {
                             try {
                                 world.setTicksPerAnimalSpawns(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("messages.ticks-per-mob-spawn.animals")
+                                sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.animals")
                                         .replace("%world%", args[0]).replace("%value%", args[3]));
                             } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                                sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
                         if (args[2].equals("ambient")) {
                             try {
                                 world.setTicksPerAmbientSpawns(Integer.parseInt(args[3]));
-                                sender.sendMessage(("messages.ticks-per-mob-spawn.ambient")
+                                sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.ambient")
                                         .replace("%world%", args[0]).replace("%value%", args[3]));
                             } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                                sender.sendMessage(Main.getColorString("command-error-syntax"));
 
                             }
                         }
                         if (args[2].equals("water-ambient")) {
                             try {
                                 world.setTicksPerWaterAmbientSpawns(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("messages.ticks-per-mob-spawn.water-animals")
+                                sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.water-animals")
                                         .replace("%world%", args[0]).replace("%value%", args[3]));
                             } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                                sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
                         if (args[2].equals("water")) {
                             try {
                                 world.setTicksPerWaterSpawns(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("messages.ticks-per-mob-spawn.water-ambient")
+                                sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.water-ambient")
                                         .replace("%world%", args[0]).replace("%value%", args[3]));
                             } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                                sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
                         if (args[2].equals("underground-creature-spawns")) {
                             try {
                                 world.setTicksPerWaterUndergroundCreatureSpawns(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("messages.ticks-per-mob-spawn.water-ambient")
+                                sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.water-ambient")
                                         .replace("%world%", args[0]).replace("%value%", args[3]));
                             } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                                sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
                     }
                     else {
-                        sender.sendMessage(Main.getColorString("messages.no-permissions"));
+                        sender.sendMessage(Main.getColorString("no-permissions"));
                     }
                 }
                 else if (args.length == 4 && args[1].equals("spawn-limit")) {
@@ -199,51 +200,51 @@ public class Command implements CommandExecutor {
                         if (args[2].equals("monsters")) {
                             try {
                                 world.setMonsterSpawnLimit(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("messages.spawn-limits.monsters")
+                                sender.sendMessage(Main.getColorString("spawn-limits.monsters")
                                         .replace("%world%", args[0]).replace("%value%", args[3]));
                             } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                                sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
                         if (args[2].equals("animals")) {
                             try {
                                 world.setAnimalSpawnLimit(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("messages.spawn-limits.animals")
+                                sender.sendMessage(Main.getColorString("spawn-limits.animals")
                                         .replace("%world%", args[0]).replace("%value%", args[3]));
                             } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                                sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
                         if (args[2].equals("ambient")) {
                             try {
                                 world.setAmbientSpawnLimit(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("messages.spawn-limits.ambient")
+                                sender.sendMessage(Main.getColorString("spawn-limits.ambient")
                                         .replace("%world%", args[0]).replace("%value%", args[3]));
                             } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                                sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
                         if (args[2].equals("water-animals")) {
                             try {
                                 world.setWaterAnimalSpawnLimit(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("messages.spawn-limits.water-animals")
+                                sender.sendMessage(Main.getColorString("spawn-limits.water-animals")
                                         .replace("%world%", args[0]).replace("%value%", args[3]));
                             } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                                sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
                         if (args[2].equals("water-ambient")) {
                             try {
                                 world.setWaterAmbientSpawnLimit(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("messages.spawn-limits.water-ambient")
+                                sender.sendMessage(Main.getColorString("spawn-limits.water-ambient")
                                         .replace("%world%", args[0]).replace("%value%", args[3]));
                             } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                                sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
                     }
                     else {
-                        sender.sendMessage(Main.getColorString("messages.no-permissions"));
+                        sender.sendMessage(Main.getColorString("no-permissions"));
                     }
                 }
                 else if (args.length == 2 && args[1].equals("world-profile")) {
@@ -254,7 +255,7 @@ public class Command implements CommandExecutor {
                         }
                         if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
                             StringBuilder profile = new StringBuilder();
-                            for (String s : Main.getInstance().getConfig().getStringList("messages.world-profile")) {
+                            for (String s : LanguageManager.getStringList("world-profile")) {
                                 profile.append(ChatColor.stripColor(Main.colorChat(s))
                                         .replace("%world%", args[0])
                                         .replace("%entity_count%", String.valueOf(world.getEntities().size()))
@@ -266,10 +267,10 @@ public class Command implements CommandExecutor {
                                         .replace("%worldborder%", String.valueOf(world.getWorldBorder().getSize()))
                                         .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size()))).append("\n");
                             }
-                            sender.sendMessage(Main.getColorString("messages.hastebin.world-profile").replace("%link%", HastebinAPI.post(profile.toString())));
+                            sender.sendMessage(Main.getColorString("hastebin.world-profile").replace("%link%", HastebinAPI.post(profile.toString())));
                         }
                         else {
-                            for (String s : Main.getInstance().getConfig().getStringList("messages.world-profile")) {
+                            for (String s : LanguageManager.getStringList("world-profile")) {
                                 sender.sendMessage(Main.colorChat(s)
                                         .replace("%world%", args[0])
                                         .replace("%entity_count%", String.valueOf(world.getEntities().size()))
@@ -284,26 +285,26 @@ public class Command implements CommandExecutor {
                         }
                     }
                     else {
-                        sender.sendMessage(Main.getColorString("messages.no-permissions"));
+                        sender.sendMessage(Main.getColorString("no-permissions"));
                     }
                 } else if (args.length == 4 && args[1].equals("gamerule")) {
                     if (sender.hasPermission("mtech.world.gamerule")) {
                         if (!Arrays.stream(GameRule.values()).toList().contains(GameRule.getByName(args[2]))) {
-                            sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                            sender.sendMessage(Main.getColorString("command-error-syntax"));
                         }
                         if (!(args[3].equals("true") || args[3].equals("false") || args[3].matches("-?\\d+(\\.\\d+)?"))) {
-                            sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                            sender.sendMessage(Main.getColorString("command-error-syntax"));
                         } else {
                             world.setGameRuleValue(args[2], args[3]);
-                            sender.sendMessage(Main.getColorString("messages.gamerule-value-change")
+                            sender.sendMessage(Main.getColorString("gamerule-value-change")
                                     .replace("%world%", args[0]));
                         }
                     }
                     else {
-                        sender.sendMessage(Main.getColorString("messages.no-permissions"));
+                        sender.sendMessage(Main.getColorString("no-permissions"));
                     }
                 } else {
-                    sender.sendMessage(Main.getColorString("messages.command-error-syntax"));
+                    sender.sendMessage(Main.getColorString("command-error-syntax"));
                 }
             }
         }
