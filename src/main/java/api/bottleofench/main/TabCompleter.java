@@ -49,37 +49,37 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
         }
 
         if (args.length == 3 && args[1].equals("ticks-per-mob-spawn")) {
-            if (sender.hasPermission("mtech.world.ticks-per-mob-spawn")) {
-                List<String> settings = new ArrayList<>();
-                settings.add("reset");
-                settings.add("monsters");
-                settings.add("animals");
-                settings.add("ambient");
-                settings.add("water-ambient");
-                settings.add("water-animals");
+            List<String> settings = new ArrayList<>();
+            if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.reset")) settings.add("reset");
+            if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.monsters")) settings.add("monsters");
+            if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.animals")) settings.add("animals");
+            if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.ambient")) settings.add("ambient");
+            if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.water-ambient")) settings.add("water-ambient");
+            if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.water-animals")) settings.add("water-animals");
 
-                List<String> result = new ArrayList<>();
-                for (String b : settings) {
-                    if (b.toLowerCase().startsWith(args[2].toLowerCase()))
-                        result.add(b);
-                }
-                return result;
+            List<String> result = new ArrayList<>();
+            for (String b : settings) {
+                if (b.toLowerCase().startsWith(args[2].toLowerCase()))
+                    result.add(b);
             }
+            return result;
         }
 
         if (args.length == 3 && args[1].equals("spawn-limit")) {
-            if (sender.hasPermission("mtech.world.spawn-limit")) {
-                List<String> settings = new ArrayList<>();
-                settings.add("reset"); settings.add("monsters"); settings.add("animals"); settings.add("ambient");
-                settings.add("water-ambient"); settings.add("water-animals");
+            List<String> settings = new ArrayList<>();
+            if (sender.hasPermission("mtech.world.spawn-limit.reset")) settings.add("reset");
+            if (sender.hasPermission("mtech.world.spawn-limit.monsters")) settings.add("monsters");
+            if (sender.hasPermission("mtech.world.spawn-limit.animals")) settings.add("animals");
+            if (sender.hasPermission("mtech.world.spawn-limit.ambient")) settings.add("ambient");
+            if (sender.hasPermission("mtech.world.spawn-limit.water-ambient")) settings.add("water-ambient");
+            if (sender.hasPermission("mtech.world.spawn-limit.water-animals")) settings.add("water-animals");
 
-                List<String> result = new ArrayList<>();
-                for (String b : settings) {
-                    if (b.toLowerCase().startsWith(args[2].toLowerCase()))
-                        result.add(b);
-                }
-                return result;
+            List<String> result = new ArrayList<>();
+            for (String b : settings) {
+                if (b.toLowerCase().startsWith(args[2].toLowerCase()))
+                    result.add(b);
             }
+            return result;
         }
 
         if (args.length == 3 && args[1].equals("difficulty")) {

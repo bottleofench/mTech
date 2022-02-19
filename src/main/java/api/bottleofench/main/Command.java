@@ -93,7 +93,7 @@ public class Command implements CommandExecutor {
                         }
                     }
                     if (args[2].equals("reset") && args[1].equals("ticks-per-mob-spawn")) {
-                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn")) {
+                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.reset")) {
                             world.setTicksPerMonsterSpawns(1);
                             world.setTicksPerAnimalSpawns(400);
                             world.setTicksPerWaterSpawns(1);
@@ -134,8 +134,8 @@ public class Command implements CommandExecutor {
                     }
                 }
                 else if (args.length == 4 && args[1].equals("ticks-per-mob-spawn")) {
-                    if (sender.hasPermission("mtech.world.ticks-per-mob-spawn")) {
-                        if (args[2].equals("monsters")) {
+                    if (args[2].equals("monsters")) {
+                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.monsters")) {
                             try {
                                 world.setTicksPerMonsterSpawns(Integer.parseInt(args[3]));
                                 sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.monsters")
@@ -144,7 +144,12 @@ public class Command implements CommandExecutor {
                                 sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
-                        if (args[2].equals("animals")) {
+                        else {
+                            sender.sendMessage(Main.getColorString("no-permissions"));
+                        }
+                    }
+                    if (args[2].equals("animals")) {
+                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.animals")) {
                             try {
                                 world.setTicksPerAnimalSpawns(Integer.parseInt(args[3]));
                                 sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.animals")
@@ -153,17 +158,26 @@ public class Command implements CommandExecutor {
                                 sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
-                        if (args[2].equals("ambient")) {
+                        else {
+                            sender.sendMessage(Main.getColorString("no-permissions"));
+                        }
+                    }
+                    if (args[2].equals("ambient")) {
+                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.ambient")) {
                             try {
                                 world.setTicksPerAmbientSpawns(Integer.parseInt(args[3]));
                                 sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.ambient")
                                         .replace("%world%", args[0]).replace("%value%", args[3]));
                             } catch (NumberFormatException e) {
                                 sender.sendMessage(Main.getColorString("command-error-syntax"));
-
                             }
                         }
-                        if (args[2].equals("water-ambient")) {
+                        else {
+                            sender.sendMessage(Main.getColorString("no-permissions"));
+                        }
+                    }
+                    if (args[2].equals("water-ambient")) {
+                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.water-ambient")) {
                             try {
                                 world.setTicksPerWaterAmbientSpawns(Integer.parseInt(args[3]));
                                 sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.water-animals")
@@ -172,7 +186,12 @@ public class Command implements CommandExecutor {
                                 sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
-                        if (args[2].equals("water")) {
+                        else {
+                            sender.sendMessage(Main.getColorString("no-permissions"));
+                        }
+                    }
+                    if (args[2].equals("water")) {
+                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.water")) {
                             try {
                                 world.setTicksPerWaterSpawns(Integer.parseInt(args[3]));
                                 sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.water-ambient")
@@ -181,14 +200,8 @@ public class Command implements CommandExecutor {
                                 sender.sendMessage(Main.getColorString("command-error-syntax"));
                             }
                         }
-                        if (args[2].equals("underground-creature-spawns")) {
-                            try {
-                                world.setTicksPerWaterUndergroundCreatureSpawns(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.water-ambient")
-                                        .replace("%world%", args[0]).replace("%value%", args[3]));
-                            } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("command-error-syntax"));
-                            }
+                        else {
+                            sender.sendMessage(Main.getColorString("no-permissions"));
                         }
                     }
                     else {
@@ -196,56 +209,76 @@ public class Command implements CommandExecutor {
                     }
                 }
                 else if (args.length == 4 && args[1].equals("spawn-limit")) {
-                    if (sender.hasPermission("mtech.world.spawn-limit")) {
                         if (args[2].equals("monsters")) {
-                            try {
-                                world.setMonsterSpawnLimit(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("spawn-limits.monsters")
-                                        .replace("%world%", args[0]).replace("%value%", args[3]));
-                            } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("command-error-syntax"));
+                            if (sender.hasPermission("mtech.world.spawn-limit.monsters")) {
+                                try {
+                                    world.setMonsterSpawnLimit(Integer.parseInt(args[3]));
+                                    sender.sendMessage(Main.getColorString("spawn-limits.monsters")
+                                            .replace("%world%", args[0]).replace("%value%", args[3]));
+                                } catch (NumberFormatException e) {
+                                    sender.sendMessage(Main.getColorString("command-error-syntax"));
+                                }
+                            }
+                            else {
+                                sender.sendMessage(Main.getColorString("no-permissions"));
                             }
                         }
                         if (args[2].equals("animals")) {
-                            try {
-                                world.setAnimalSpawnLimit(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("spawn-limits.animals")
-                                        .replace("%world%", args[0]).replace("%value%", args[3]));
-                            } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("command-error-syntax"));
+                            if (sender.hasPermission("mtech.world.spawn-limit.animals")) {
+                                try {
+                                    world.setAnimalSpawnLimit(Integer.parseInt(args[3]));
+                                    sender.sendMessage(Main.getColorString("spawn-limits.animals")
+                                            .replace("%world%", args[0]).replace("%value%", args[3]));
+                                } catch (NumberFormatException e) {
+                                    sender.sendMessage(Main.getColorString("command-error-syntax"));
+                                }
+                            }
+                            else {
+                                sender.sendMessage(Main.getColorString("no-permissions"));
                             }
                         }
                         if (args[2].equals("ambient")) {
-                            try {
-                                world.setAmbientSpawnLimit(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("spawn-limits.ambient")
-                                        .replace("%world%", args[0]).replace("%value%", args[3]));
-                            } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("command-error-syntax"));
+                            if (sender.hasPermission("mtech.world.spawn-limit.ambient")) {
+                                try {
+                                    world.setAmbientSpawnLimit(Integer.parseInt(args[3]));
+                                    sender.sendMessage(Main.getColorString("spawn-limits.ambient")
+                                            .replace("%world%", args[0]).replace("%value%", args[3]));
+                                } catch (NumberFormatException e) {
+                                    sender.sendMessage(Main.getColorString("command-error-syntax"));
+                                }
+                            }
+                            else {
+                                sender.sendMessage(Main.getColorString("no-permissions"));
                             }
                         }
                         if (args[2].equals("water-animals")) {
-                            try {
-                                world.setWaterAnimalSpawnLimit(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("spawn-limits.water-animals")
-                                        .replace("%world%", args[0]).replace("%value%", args[3]));
-                            } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("command-error-syntax"));
+                            if (sender.hasPermission("mtech.world.spawn-limit.water-animals")) {
+                                try {
+                                    world.setWaterAnimalSpawnLimit(Integer.parseInt(args[3]));
+                                    sender.sendMessage(Main.getColorString("spawn-limits.water-animals")
+                                            .replace("%world%", args[0]).replace("%value%", args[3]));
+                                } catch (NumberFormatException e) {
+                                    sender.sendMessage(Main.getColorString("command-error-syntax"));
+                                }
+                            }
+                            else {
+                                sender.sendMessage(Main.getColorString("no-permissions"));
                             }
                         }
                         if (args[2].equals("water-ambient")) {
-                            try {
-                                world.setWaterAmbientSpawnLimit(Integer.parseInt(args[3]));
-                                sender.sendMessage(Main.getColorString("spawn-limits.water-ambient")
-                                        .replace("%world%", args[0]).replace("%value%", args[3]));
-                            } catch (NumberFormatException e) {
-                                sender.sendMessage(Main.getColorString("command-error-syntax"));
+                            if (sender.hasPermission("mtech.world.spawn-limit.water-ambient")) {
+                                try {
+                                    world.setWaterAmbientSpawnLimit(Integer.parseInt(args[3]));
+                                    sender.sendMessage(Main.getColorString("spawn-limits.water-ambient")
+                                            .replace("%world%", args[0]).replace("%value%", args[3]));
+                                } catch (NumberFormatException e) {
+                                    sender.sendMessage(Main.getColorString("command-error-syntax"));
+                                }
+                            }
+                            else {
+                                sender.sendMessage(Main.getColorString("no-permissions"));
                             }
                         }
-                    }
-                    else {
-                        sender.sendMessage(Main.getColorString("no-permissions"));
-                    }
                 }
                 else if (args.length == 2 && args[1].equals("world-profile")) {
                     if (sender.hasPermission("mtech.world.world-profile")) {

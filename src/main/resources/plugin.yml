@@ -18,6 +18,7 @@ permissions:
       reload:
         default: op
       world:
+        default: op
         children:
           world-profile:
             default: op
@@ -29,5 +30,31 @@ permissions:
             default: op
           spawn-limit:
             default: op
+            children:
+              reset:
+                default: op
+              monsters:
+                default: op
+              animals:
+                default: op
+              ambient:
+                default: op
+              water-ambient:
+                default: op
+              water-animals:
+                default: op
           ticks-per-mob-spawn:
             default: op
+            children:
+              reset:
+                default: op
+                monsters:
+                  default: op
+                animals:
+                  default: op
+                ambient:
+                  default: op
+                water-ambient:
+                  default: op
+                water-animals:
+                  default: op
