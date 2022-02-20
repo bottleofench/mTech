@@ -12,14 +12,14 @@ import java.util.stream.Stream;
 public class LanguageManager {
     private static FileConfiguration info;
     public LanguageManager() {
-        String loaded_lang;
         if (Main.getInstance().getConfig().getString("language-file") == null) {
-            Bukkit.getLogger().info("Failed to create language file!");
+            Bukkit.getLogger().info("Failed to create language file! Please download default config file from GitHub or create custom language file!");
             Bukkit.getPluginManager().disablePlugin(Main.getInstance());
         }
         else {
-            loaded_lang = Main.getInstance().getConfig().getString("language-file");
+            String loaded_lang = Main.getInstance().getConfig().getString("language-file");
 
+            assert loaded_lang != null;
             File languagefile = new File(Main.getInstance().getDataFolder() + File.separator + "lang" + File.separator, loaded_lang);
 
             if (!languagefile.exists()) {
@@ -30,7 +30,7 @@ public class LanguageManager {
                         .collect(Collectors.toList());
 
                 if (!files.contains(loaded_lang)) {
-                    Bukkit.getLogger().info("Failed to create language file!");
+                    Bukkit.getLogger().info("Failed to create language file! There is no such language file!");
                     Bukkit.getPluginManager().disablePlugin(Main.getInstance());
                 }
                 else {
