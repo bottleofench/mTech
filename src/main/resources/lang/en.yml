@@ -15,7 +15,7 @@ ticks-per-mob-spawn:
   animals: "&aYou have successfully set a ticks per animal spawns in &f%world% &ato &f%value%!"
   ambient: "&aYou have successfully set a ticks per ambient spawns in &f%world% &ato &f%value%!"
   water-ambient: "&aYou have successfully set a ticks per water ambient spawns in &f%world% &ato &f%value%!"
-  water: "&aYou have successfully set a ticks per water mob spawns in &f%world% &ato &f%value%!"
+  water-animals: "&aYou have successfully set a ticks per water mob spawns in &f%world% &ato &f%value%!"
   underground-creature-spawns: "&aYou have successfully set a ticks per underground creature spawns in &f%world% &ato &f%value%!"
   reset: "&aYou have successfully reset ticks per mob spawns in &f%world% &afor all mob types!"
 spawn-limits:
