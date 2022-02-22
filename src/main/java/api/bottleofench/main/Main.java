@@ -33,6 +33,10 @@ public final class Main extends JavaPlugin {
             saveDefaultConfig();
         }
 
+        if (Main.getInstance().getConfig().getString("config-version") != null) {
+            saveDefaultConfig();
+        }
+
         reloadConfig();
         getCommand("mtech").setExecutor(new Command());
         getCommand("mtech").setTabCompleter(new TabCompleter());
