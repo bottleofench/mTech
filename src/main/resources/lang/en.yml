@@ -33,7 +33,7 @@ server-profile:
   - "&eRAM: &f%ram_using%MB / %ram_max%MB"
   - "&eCPU: &f%cpu_using%% / 100%"
   - "&eServer Uptime: &f%uptime% minutes"
-  - "&eOnline mode: &f%online-mode%"
+  - "&eOnline mode: &f%online_mode%"
   - "&ePlayer count: &f%player_count%"
   - "&eLoaded chunks count: &f%loaded_chunks_count%"
 world-profile:

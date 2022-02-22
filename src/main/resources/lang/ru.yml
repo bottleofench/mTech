@@ -32,7 +32,7 @@ server-profile:
   - "&eИспользование оперативной памяти: &f%ram_using%MB / %ram_max%MB"
   - "&eИспользование процессора: &f%cpu_using%% / 100%"
   - "&eВремя работы сервера: &f%uptime% минут"
-  - "&eЛицензия: &f%online-mode%"
+  - "&eЛицензия: &f%online_mode%"
   - "&eКол-во игроков: &f%player_count%"
   - "&eКоличество загруженных чанков: &f%loaded_chunks_count%"
 world-profile:

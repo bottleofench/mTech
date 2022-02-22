@@ -31,41 +31,52 @@ public class Command implements CommandExecutor {
                         OperatingSystemMXBean.class);
                 Runtime runtime = Runtime.getRuntime();
 
-                int chunks = 0;
+                int loaded_chunks = 0;
                 for (World w : Bukkit.getWorlds()) {
-                    chunks += w.getLoadedChunks().length;
+                    loaded_chunks += w.getLoadedChunks().length;
                 }
+
+                String osname = osBean.getName();
+                String arch = osBean.getArch();
+                String ram_using = String.valueOf((runtime.maxMemory() - runtime.freeMemory()) / 1048576);
+                String ram_max = String.valueOf(runtime.maxMemory() / 1048576);
+                String cpu_using = String.valueOf((int) (osBean.getCpuLoad() * 100));
+                String core = Bukkit.getServer().getVersion();
+                String uptime = String.valueOf((System.currentTimeMillis() - Main.getLastStartTime()) / 1000 / 60);
+                String loaded_chunks_count = String.valueOf(loaded_chunks);
+                String player_count =  String.valueOf(Bukkit.getOnlinePlayers().size());
+                String online_mode = String.valueOf(Bukkit.getOnlineMode());
 
                 if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
                     StringBuilder profile = new StringBuilder();
                     for (String s : LanguageManager.getStringList("server-profile")) {
                         profile.append(ChatColor.stripColor(Main.colorChat(s))
-                                .replace("%os%", osBean.getName())
-                                .replace("%arch%", osBean.getArch())
-                                .replace("%ram_using%", String.valueOf((runtime.maxMemory() - runtime.freeMemory()) / 1048576))
-                                .replace("%ram_max%", String.valueOf(runtime.maxMemory() / 1048576))
-                                .replace("%cpu_using%", String.valueOf((int) (osBean.getCpuLoad() * 100)))
-                                .replace("%core%",  Bukkit.getServer().getVersion())
-                                .replace("%uptime%", String.valueOf((System.currentTimeMillis() - Main.getLastStartTime()) / 1000 / 60))
-                                .replace("%loaded_chunks_count%", String.valueOf(chunks))
-                                .replace("%player_count%", String.valueOf(Bukkit.getOnlinePlayers().size()))
-                                .replace("%online-mode%", String.valueOf(Bukkit.getOnlineMode()))).append("\n");
+                                .replace("%os%", osname)
+                                .replace("%arch%", arch)
+                                .replace("%ram_using%", ram_using)
+                                .replace("%ram_max%", ram_max)
+                                .replace("%cpu_using%", cpu_using)
+                                .replace("%core%",  core)
+                                .replace("%uptime%", uptime)
+                                .replace("%loaded_chunks_count%", loaded_chunks_count)
+                                .replace("%player_count%", player_count)
+                                .replace("%online_mode%", online_mode)).append("\n");
                     }
                     sender.sendMessage(Main.getColorString("hastebin.server-profile").replace("%link%", HastebinAPI.post(profile.toString())));
                 }
                 else {
                     for (String s : LanguageManager.getStringList("server-profile")) {
                         sender.sendMessage(Main.colorChat(s)
-                                .replace("%os%", osBean.getName())
-                                .replace("%arch%", osBean.getArch())
-                                .replace("%ram_using%", String.valueOf((runtime.maxMemory() - runtime.freeMemory()) / 1048576))
-                                .replace("%ram_max%", String.valueOf(runtime.maxMemory() / 1048576))
-                                .replace("%cpu_using%", String.valueOf((int) (osBean.getCpuLoad() * 100)))
-                                .replace("%core%",  Bukkit.getServer().getVersion())
-                                .replace("%uptime%", String.valueOf((System.currentTimeMillis() - Main.getLastStartTime()) / 1000 / 60))
-                                .replace("%loaded_chunks_count%", String.valueOf(chunks))
-                                .replace("%player_count%", String.valueOf(Bukkit.getOnlinePlayers().size()))
-                                .replace("%online-mode%", String.valueOf(Bukkit.getOnlineMode())));
+                                .replace("%os%", osname)
+                                .replace("%arch%", arch)
+                                .replace("%ram_using%", ram_using)
+                                .replace("%ram_max%", ram_max)
+                                .replace("%cpu_using%", cpu_using)
+                                .replace("%core%",  core)
+                                .replace("%uptime%", uptime)
+                                .replace("%loaded_chunks_count%", loaded_chunks_count)
+                                .replace("%player_count%", player_count)
+                                .replace("%online_mode%", online_mode));
                     }
                 }
             }
@@ -80,23 +91,37 @@ public class Command implements CommandExecutor {
 
                     Player p = Bukkit.getPlayerExact(args[1]);
 
+                    String nick = p.getName();
+                    String ip = p.getAddress().getHostName();
+                    String x = String.valueOf((int) p.getLocation().getX());
+                    String y = String.valueOf((int) p.getLocation().getY());
+                    String z = String.valueOf((int) p.getLocation().getZ());
+                    String ping = String.valueOf(p.getPing());
+                    String world = p.getWorld().getName();
+                    String health = String.valueOf(p.getHealth());
+                    String food = String.valueOf(p.getFoodLevel());
+                    String saturation = String.valueOf(p.getSaturation());
+                    String time = String.valueOf(p.getStatistic(Statistic.TOTAL_WORLD_TIME) / 20 / 60);
+                    String gamemode = String.valueOf(p.getGameMode());
+                    String deaths = String.valueOf(p.getStatistic(Statistic.DEATHS));
+
                     if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
                         StringBuilder profile = new StringBuilder();
                         for (String s : LanguageManager.getStringList("player-profile")) {
                             profile.append(ChatColor.stripColor(Main.colorChat(s))
-                                    .replace("%nick%", p.getName())
-                                    .replace("%ip%", p.getAddress().getHostName())
-                                    .replace("%x%", String.valueOf((int) p.getLocation().getX()))
-                                    .replace("%y%", String.valueOf((int) p.getLocation().getY()))
-                                    .replace("%z%", String.valueOf((int) p.getLocation().getZ()))
-                                    .replace("%ping%", String.valueOf(p.getPing()))
-                                    .replace("%world%", p.getWorld().getName())
-                                    .replace("%health%",  String.valueOf(p.getHealth()))
-                                    .replace("%food%", String.valueOf(p.getFoodLevel()))
-                                    .replace("%saturation%", String.valueOf(p.getSaturation()))
-                                    .replace("%time%", String.valueOf(p.getStatistic(Statistic.TOTAL_WORLD_TIME) / 20 / 60))
-                                    .replace("%gamemode%", String.valueOf(p.getGameMode()))
-                                    .replace("%deaths%", String.valueOf(p.getStatistic(Statistic.DEATHS)))).append("\n");
+                                    .replace("%nick%", nick)
+                                    .replace("%ip%", ip)
+                                    .replace("%x%", x)
+                                    .replace("%y%", y)
+                                    .replace("%z%", z)
+                                    .replace("%ping%", ping)
+                                    .replace("%world%", world)
+                                    .replace("%health%",  health)
+                                    .replace("%food%", food)
+                                    .replace("%saturation%", saturation)
+                                    .replace("%time%", time)
+                                    .replace("%gamemode%", gamemode)
+                                    .replace("%deaths%", deaths)).append("\n");
                         }
                         sender.sendMessage(Main.getColorString("hastebin.player-profile").replace("%link%", HastebinAPI.post(profile.toString())));
                     }
@@ -153,7 +178,6 @@ public class Command implements CommandExecutor {
                             world.setTicksPerSpawns(SpawnCategory.WATER_AMBIENT, 1);
                             world.setTicksPerSpawns(SpawnCategory.WATER_ANIMAL, 1);
                             world.setTicksPerSpawns(SpawnCategory.AMBIENT, 1);
-                            world.setTicksPerSpawns(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1);
                             sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.reset")
                                     .replace("%world%", args[0]));
                         }
@@ -340,34 +364,45 @@ public class Command implements CommandExecutor {
                         for (Chunk chunk : world.getLoadedChunks()) {
                             tile_entity_count += chunk.getTileEntities().length;
                         }
+
+                        String worldName = args[0];
+                        String entity_count = String.valueOf(world.getEntities().size());
+                        String player_count = String.valueOf(world.getPlayers().size());
+                        String view_distance = String.valueOf(world.getViewDistance());
+                        String sim_distance = String.valueOf(world.getSimulationDistance());
+                        String living_entity_count = String.valueOf(world.getLivingEntities().size());
+                        String tile_entity_countStr = String.valueOf(tile_entity_count);
+                        String worldborder = String.valueOf(world.getWorldBorder().getSize());
+                        String loaded_chunks_count = String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size());
+
                         if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
                             StringBuilder profile = new StringBuilder();
                             for (String s : LanguageManager.getStringList("world-profile")) {
                                 profile.append(ChatColor.stripColor(Main.colorChat(s))
-                                        .replace("%world%", args[0])
-                                        .replace("%entity_count%", String.valueOf(world.getEntities().size()))
-                                        .replace("%player_count%", String.valueOf(world.getPlayers().size()))
-                                        .replace("%view_distance%", String.valueOf(world.getViewDistance()))
-                                        .replace("%sim_distance%", String.valueOf(world.getSimulationDistance()))
-                                        .replace("%living_entity_count%", String.valueOf(world.getLivingEntities().size()))
-                                        .replace("%tile_entity_count%", String.valueOf(tile_entity_count))
-                                        .replace("%worldborder%", String.valueOf(world.getWorldBorder().getSize()))
-                                        .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size()))).append("\n");
+                                        .replace("%world%", worldName)
+                                        .replace("%entity_count%", entity_count)
+                                        .replace("%player_count%", player_count)
+                                        .replace("%view_distance%", view_distance)
+                                        .replace("%sim_distance%", sim_distance)
+                                        .replace("%living_entity_count%", living_entity_count)
+                                        .replace("%tile_entity_count%", tile_entity_countStr)
+                                        .replace("%worldborder%", worldborder)
+                                        .replace("%loaded_chunks_count%", loaded_chunks_count)).append("\n");
                             }
                             sender.sendMessage(Main.getColorString("hastebin.world-profile").replace("%link%", HastebinAPI.post(profile.toString())));
                         }
                         else {
                             for (String s : LanguageManager.getStringList("world-profile")) {
                                 sender.sendMessage(Main.colorChat(s)
-                                        .replace("%world%", args[0])
-                                        .replace("%entity_count%", String.valueOf(world.getEntities().size()))
-                                        .replace("%player_count%", String.valueOf(world.getPlayers().size()))
-                                        .replace("%view_distance%", String.valueOf(world.getViewDistance()))
-                                        .replace("%sim_distance%", String.valueOf(world.getSimulationDistance()))
-                                        .replace("%living_entity_count%", String.valueOf(world.getLivingEntities().size()))
-                                        .replace("%tile_entity_count%", String.valueOf(tile_entity_count))
-                                        .replace("%worldborder%", String.valueOf(world.getWorldBorder().getSize()))
-                                        .replace("%loaded_chunks_count%", String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size())));
+                                        .replace("%world%", worldName)
+                                        .replace("%entity_count%", entity_count)
+                                        .replace("%player_count%", player_count)
+                                        .replace("%view_distance%", view_distance)
+                                        .replace("%sim_distance%", sim_distance)
+                                        .replace("%living_entity_count%", living_entity_count)
+                                        .replace("%tile_entity_count%", tile_entity_countStr)
+                                        .replace("%worldborder%", worldborder)
+                                        .replace("%loaded_chunks_count%", loaded_chunks_count));
                             }
                         }
                     }
