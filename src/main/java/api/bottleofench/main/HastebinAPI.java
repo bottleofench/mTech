@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 public class HastebinAPI {
 
-    public static String post(String text) {
+    protected static String post(String text) {
         try {
             byte[] postData = text.getBytes(StandardCharsets.UTF_8);
             int postDataLength = postData.length;

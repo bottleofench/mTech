@@ -69,11 +69,11 @@ public final class Main extends JavaPlugin {
         Bukkit.getLogger().info(Main.colorChat("&7[&6mTech&7] &cSuccessfully disabled!"));
     }
 
-    public static String getColorString(String str) {
+    static String getColorString(String str) {
         return ChatColor.translateAlternateColorCodes('&', LanguageManager.get(str));
     }
 
-    public static String colorChat(String str) {
+    static String colorChat(String str) {
         return ChatColor.translateAlternateColorCodes('&', str);
     }
 }

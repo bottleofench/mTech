@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LanguageManager {
     private static FileConfiguration info;
-    public LanguageManager() {
+    protected LanguageManager() {
         if (Main.getInstance().getConfig().getString("language-file") == null) {
             Bukkit.getLogger().info("Failed to create language file! Please download default config file from GitHub or create custom language file!");
             Bukkit.getPluginManager().disablePlugin(Main.getInstance());
@@ -35,11 +35,11 @@ public class LanguageManager {
             info = YamlConfiguration.loadConfiguration(languagefile);
         }
     }
-    public static String get(String key) {
+    protected static String get(String key) {
         return info.getString(key);
     }
 
-    public static List<String> getStringList(String key) {
+    protected static List<String> getStringList(String key) {
         return info.getStringList(key);
     }
 }
