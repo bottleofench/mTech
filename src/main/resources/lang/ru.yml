@@ -47,6 +47,8 @@ world-profile:
 player-profile:
   - "&6&lПрофайл игрока: &f%nick%"
   - "&eIP-адрес: &f%ip%"
+  - "&eПинг: &f%ping% мс"
+  - "&eМир: &f%world%"
   - "&eКоординаты: &f%x% %y% %z%"
   - "&eЗдоровье: &f%health%"
   - "&eУровень еды: &f%food%"

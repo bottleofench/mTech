@@ -48,6 +48,8 @@ world-profile:
 player-profile:
   - "&6&lPlayer profile: &f%nick%"
   - "&ePlayer IP: &f%ip%"
+  - "&ePing: &f%ping% ms"
+  - "&eWorld: &f%world%"
   - "&eCoords: &f%x% %y% %z%"
   - "&eHealth: &f%health%"
   - "&eFood: &f%food%"
