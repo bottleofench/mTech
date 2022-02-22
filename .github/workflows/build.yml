@@ -13,7 +13,7 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
       - name: Prepare to upload artifact
-        run: mkdir staging && cp target/mTech*.jar staging && mv staging/mTech*.jar staging/mTech.jar
+        run: mkdir staging && cp target/mTech-0.1.2.jar staging && mv staging/mTech-0.1.2.jar staging/mTech.jar
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
