@@ -36,16 +36,16 @@ public class Command implements CommandExecutor {
                     loaded_chunks += w.getLoadedChunks().length;
                 }
 
-                String osname = osBean.getName();
-                String arch = osBean.getArch();
-                String ram_using = String.valueOf((runtime.maxMemory() - runtime.freeMemory()) / 1048576);
-                String ram_max = String.valueOf(runtime.maxMemory() / 1048576);
-                String cpu_using = String.valueOf((int) (osBean.getCpuLoad() * 100));
-                String core = Bukkit.getServer().getVersion();
-                String uptime = String.valueOf((System.currentTimeMillis() - Main.getLastStartTime()) / 1000 / 60);
-                String loaded_chunks_count = String.valueOf(loaded_chunks);
-                String player_count =  String.valueOf(Bukkit.getOnlinePlayers().size());
-                String online_mode = String.valueOf(Bukkit.getOnlineMode());
+                final String osname = osBean.getName();
+                final String arch = osBean.getArch();
+                final String ram_using = String.valueOf((runtime.maxMemory() - runtime.freeMemory()) / 1048576);
+                final String ram_max = String.valueOf(runtime.maxMemory() / 1048576);
+                final String cpu_using = String.valueOf((int) (osBean.getCpuLoad() * 100));
+                final String core = Bukkit.getServer().getVersion();
+                final String uptime = String.valueOf((System.currentTimeMillis() - Main.getLastStartTime()) / 1000 / 60);
+                final String loaded_chunks_count = String.valueOf(loaded_chunks);
+                final String player_count =  String.valueOf(Bukkit.getOnlinePlayers().size());
+                final String online_mode = String.valueOf(Bukkit.getOnlineMode());
 
                 if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
                     StringBuilder profile = new StringBuilder();
@@ -91,19 +91,19 @@ public class Command implements CommandExecutor {
 
                     Player p = Bukkit.getPlayerExact(args[1]);
 
-                    String nick = p.getName();
-                    String ip = p.getAddress().getHostName();
-                    String x = String.valueOf((int) p.getLocation().getX());
-                    String y = String.valueOf((int) p.getLocation().getY());
-                    String z = String.valueOf((int) p.getLocation().getZ());
-                    String ping = String.valueOf(p.getPing());
-                    String world = p.getWorld().getName();
-                    String health = String.valueOf(p.getHealth());
-                    String food = String.valueOf(p.getFoodLevel());
-                    String saturation = String.valueOf(p.getSaturation());
-                    String time = String.valueOf(p.getStatistic(Statistic.TOTAL_WORLD_TIME) / 20 / 60);
-                    String gamemode = String.valueOf(p.getGameMode());
-                    String deaths = String.valueOf(p.getStatistic(Statistic.DEATHS));
+                    final String nick = p.getName();
+                    final String ip = p.getAddress().getHostName();
+                    final String x = String.valueOf((int) p.getLocation().getX());
+                    final String y = String.valueOf((int) p.getLocation().getY());
+                    final String z = String.valueOf((int) p.getLocation().getZ());
+                    final String ping = String.valueOf(p.getPing());
+                    final String world = p.getWorld().getName();
+                    final String health = String.valueOf(p.getHealth());
+                    final String food = String.valueOf(p.getFoodLevel());
+                    final String saturation = String.valueOf(p.getSaturation());
+                    final String time = String.valueOf(p.getStatistic(Statistic.TOTAL_WORLD_TIME) / 20 / 60);
+                    final String gamemode = String.valueOf(p.getGameMode());
+                    final String deaths = String.valueOf(p.getStatistic(Statistic.DEATHS));
 
                     if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
                         StringBuilder profile = new StringBuilder();
@@ -365,15 +365,15 @@ public class Command implements CommandExecutor {
                             tile_entity_count += chunk.getTileEntities().length;
                         }
 
-                        String worldName = args[0];
-                        String entity_count = String.valueOf(world.getEntities().size());
-                        String player_count = String.valueOf(world.getPlayers().size());
-                        String view_distance = String.valueOf(world.getViewDistance());
-                        String sim_distance = String.valueOf(world.getSimulationDistance());
-                        String living_entity_count = String.valueOf(world.getLivingEntities().size());
-                        String tile_entity_countStr = String.valueOf(tile_entity_count);
-                        String worldborder = String.valueOf(world.getWorldBorder().getSize());
-                        String loaded_chunks_count = String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size());
+                        final String worldName = args[0];
+                        final String entity_count = String.valueOf(world.getEntities().size());
+                        final String player_count = String.valueOf(world.getPlayers().size());
+                        final String view_distance = String.valueOf(world.getViewDistance());
+                        final String sim_distance = String.valueOf(world.getSimulationDistance());
+                        final String living_entity_count = String.valueOf(world.getLivingEntities().size());
+                        final String tile_entity_countStr = String.valueOf(tile_entity_count);
+                        final String worldborder = String.valueOf(world.getWorldBorder().getSize());
+                        final String loaded_chunks_count = String.valueOf(Arrays.stream(world.getLoadedChunks()).toList().size());
 
                         if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
                             StringBuilder profile = new StringBuilder();
