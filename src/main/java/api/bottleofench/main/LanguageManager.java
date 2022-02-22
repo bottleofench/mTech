@@ -19,29 +19,18 @@ public class LanguageManager {
         else {
             String loaded_lang = Main.getInstance().getConfig().getString("language-file");
 
-            assert loaded_lang != null;
             File languagefile = new File(Main.getInstance().getDataFolder() + File.separator + "lang" + File.separator, loaded_lang);
 
             if (!languagefile.exists()) {
                 new File(Main.getInstance().getDataFolder().getPath() + File.separator + "lang").mkdirs();
-                List<String> files = Stream.of(new File(Main.getInstance().getDataFolder().getPath() + File.separator + "lang").listFiles())
-                        .filter(file -> !file.isDirectory())
-                        .map(File::getName)
-                        .collect(Collectors.toList());
 
-                if (!files.contains(loaded_lang)) {
-                    Bukkit.getLogger().info("Failed to create language file! There is no such language file!");
-                    Bukkit.getPluginManager().disablePlugin(Main.getInstance());
+                Main.getInstance().saveResource("lang" + File.separator + loaded_lang, true);
+                try {
+                    languagefile.createNewFile();
                 }
-                else {
-                    Main.getInstance().saveResource("lang" + File.separator + loaded_lang, true);
-                    try {
-                        languagefile.createNewFile();
-                    }
-                    catch(Exception e) {
-                        e.printStackTrace();
-                        Bukkit.getLogger().info("Failed to create language file!");
-                    }
+                catch(Exception e) {
+                    e.printStackTrace();
+                    Bukkit.getLogger().info("Failed to create language file!");
                 }
             }
 

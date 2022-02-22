@@ -6,6 +6,7 @@ import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
         if (args.length == 1) {
             List<String> worlds = new ArrayList<>();
             if (sender.hasPermission("mtech.reload")) worlds.add("reload");
+            if (sender.hasPermission("mtech.player")) worlds.add("player");
             if (sender.hasPermission("mtech.server-profile")) worlds.add("server-profile");
             for (World world : Bukkit.getWorlds()) {
                 worlds.add(world.getName());
@@ -28,6 +30,36 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
             }
             return result;
 
+        }
+
+        if (args.length == 2 && args[0].equals("player")) {
+            List<String> players = new ArrayList<>();
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                players.add(player.getName());
+            }
+
+            List<String> result = new ArrayList<>();
+            for (String b : players) {
+                if (b.toLowerCase().startsWith(args[1].toLowerCase()))
+                    result.add(b);
+            }
+            return result;
+
+        }
+
+        if (args.length == 3 && args[0].equals("player")) {
+            if (Bukkit.getOnlinePlayers().contains(Bukkit.getPlayerExact(args[1]))) {
+                List<String> settings = new ArrayList<>();
+
+                if (sender.hasPermission("mtech.player.player-profile")) settings.add("player-profile");
+
+                List<String> result = new ArrayList<>();
+                for (String b : settings) {
+                    if (b.toLowerCase().startsWith(args[2].toLowerCase()))
+                        result.add(b);
+                }
+                return result;
+            }
         }
 
         if (args.length == 2 && Bukkit.getWorlds().contains(Bukkit.getWorld(args[0]))) {

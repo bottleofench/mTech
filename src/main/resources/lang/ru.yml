@@ -8,6 +8,7 @@ pvp-mode-change: "&aВы переключили режим ПВП на &f%value%
 hastebin:
   world-profile: "&aПрофайл мира: \n&f%link%"
   server-profile: "&aПрофайл сервера: \n&f%link%"
+  player-profile: "&aПрофайл игрока: \n&f%link%"
 ticks-per-mob-spawn:
   monsters: "&aВы успешно установили кол-во тиков между спавном монстров в мире &f%world% &aна &f%value%!"
   animals: "&aВы успешно установили кол-во тиков между спавном животных в мире &f%world% &aна &f%value%!"
@@ -43,5 +44,15 @@ world-profile:
   - "&eРазмер границ мира: &f%worldborder%"
   - "&eДальность симуляции: &f%sim_distance%"
   - "&eКоличество загруженных чанков: &f%loaded_chunks_count%"
+player-profile:
+  - "&6&lПрофайл игрока: &f%nick%"
+  - "&eIP-адрес: &f%ip%"
+  - "&eКоординаты: &f%x% %y% %z%"
+  - "&eЗдоровье: &f%health%"
+  - "&eУровень еды: &f%food%"
+  - "&eУровень насыщения: &f%saturation%"
+  - "&eИгровой режим: &f%gamemode%"
+  - "&eСмертей: &f%deaths%"
+  - "&eНаиграно: &f%time% ч"
 cpu-overloaded: "&cПроцессор загружен более, чем на 90%! Сервер лагает!"
 ram-clogged: "&cОперативная память забита! Пожалуйста, очистите оперативную память или перезапустите сервер!"

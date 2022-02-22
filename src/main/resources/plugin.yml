@@ -13,6 +13,11 @@ permissions:
   mtech:
     default: op
     children:
+      player:
+        default: op
+        children:
+          player-profile:
+            default: op
       server-profile:
         default: op
       reload:

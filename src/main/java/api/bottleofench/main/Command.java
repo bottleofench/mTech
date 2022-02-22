@@ -4,12 +4,13 @@ import com.sun.management.OperatingSystemMXBean;
 import org.bukkit.*;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 import java.lang.management.ManagementFactory;
 import java.util.Arrays;
 
 public class Command implements CommandExecutor {
     @Override
-    @SuppressWarnings("all")
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         if (args.length == 0) sender.sendMessage(Main.getColorString("command-error-syntax"));
         else if (args[0].equals("reload") && sender.hasPermission("mtech.reload")) {
@@ -68,6 +69,53 @@ public class Command implements CommandExecutor {
             }
             else {
                 sender.sendMessage(Main.getColorString("no-permissions"));
+            }
+        }
+        else if (args[0].equals("player")) {
+            if (args.length == 1 || args.length == 2) sender.sendMessage(Main.getColorString("no-permissions"));
+            if (args[2].equals("player-profile")) {
+                if (sender.hasPermission("mtech.player.player-profile")) {
+
+                    Player p = Bukkit.getPlayerExact(args[1]);
+
+                    if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
+                        StringBuilder profile = new StringBuilder();
+                        for (String s : LanguageManager.getStringList("player-profile")) {
+                            profile.append(ChatColor.stripColor(Main.colorChat(s))
+                                    .replace("%nick%", p.getName())
+                                    .replace("%ip%", p.getAddress().getHostName())
+                                    .replace("%x%", String.valueOf((int) p.getLocation().getX()))
+                                    .replace("%y%", String.valueOf((int) p.getLocation().getY()))
+                                    .replace("%z%", String.valueOf((int) p.getLocation().getZ()))
+                                    .replace("%health%",  String.valueOf(p.getHealth()))
+                                    .replace("%food%", String.valueOf(p.getFoodLevel()))
+                                    .replace("%saturation%", String.valueOf(p.getSaturation()))
+                                    .replace("%time%", String.valueOf(p.getStatistic(Statistic.TOTAL_WORLD_TIME) / 20 / 60))
+                                    .replace("%gamemode%", String.valueOf(p.getGameMode()))
+                                    .replace("%deaths%", String.valueOf(p.getStatistic(Statistic.DEATHS)))).append("\n");
+                        }
+                        sender.sendMessage(Main.getColorString("hastebin.player-profile").replace("%link%", HastebinAPI.post(profile.toString())));
+                    }
+                    else {
+                        for (String s : LanguageManager.getStringList("player-profile")) {
+                            sender.sendMessage(Main.colorChat(s)
+                                    .replace("%nick%", p.getName())
+                                    .replace("%ip%", p.getAddress().getHostName())
+                                    .replace("%x%", String.valueOf((int) p.getLocation().getX()))
+                                    .replace("%y%", String.valueOf((int) p.getLocation().getY()))
+                                    .replace("%z%", String.valueOf((int) p.getLocation().getZ()))
+                                    .replace("%health%",  String.valueOf(p.getHealth()))
+                                    .replace("%food%", String.valueOf(p.getFoodLevel()))
+                                    .replace("%saturation%", String.valueOf(p.getSaturation()))
+                                    .replace("%time%", String.valueOf(p.getStatistic(Statistic.TOTAL_WORLD_TIME) / 20 / 60 / 60))
+                                    .replace("%gamemode%", String.valueOf(p.getGameMode()))
+                                    .replace("%deaths%", String.valueOf(p.getStatistic(Statistic.DEATHS))));
+                        }
+                    }
+                }
+                else {
+                    sender.sendMessage(Main.getColorString("no-permissions"));
+                }
             }
         }
         else {

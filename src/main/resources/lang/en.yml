@@ -8,6 +8,7 @@ pvp-mode-change: "&aYou switched pvp mode to &f%value%"
 hastebin:
   world-profile: "&aWorld profile: \n&f%link%"
   server-profile: "&aServer profile: \n&f%link%"
+  player-profile: "&aПрофайл игрока: \n&f%link%"
 ticks-per-mob-spawn:
   monsters: "&aYou have successfully set a ticks per monster spawns in &f%world% &ato &f%value%!"
   animals: "&aYou have successfully set a ticks per animal spawns in &f%world% &ato &f%value%!"
@@ -44,5 +45,15 @@ world-profile:
   - "&eWorldborder size: &f%worldborder%"
   - "&eSimulation distance: &f%sim_distance%"
   - "&eLoaded chunks count: &f%loaded_chunks_count%"
+player-profile:
+  - "&6&lPlayer profile: &f%nick%"
+  - "&ePlayer IP: &f%ip%"
+  - "&eCoords: &f%x% %y% %z%"
+  - "&eHealth: &f%health%"
+  - "&eFood: &f%food%"
+  - "&eSaturation: &f%saturation%"
+  - "&eGamemode: &f%gamemode%"
+  - "&eDeaths: &f%deaths%"
+  - "&eTime played: &f%time% hours"
 cpu-overloaded: "&cCPU load more than 90%! Server is lagging!"
 ram-clogged: "&cRAM usage is clogged! Please, clear the RAM or restart the server!"
