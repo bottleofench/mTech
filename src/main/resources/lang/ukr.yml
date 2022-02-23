@@ -1,7 +1,7 @@
 # Author - bottleofench. Translator - aufer.
 no-permissions: "&cУ вас немає на це прав!"
 reload: "&aКонфігурація плагіну була перезавантажена!"
-bad-core-warnings: "&c(Please, change your server software to better alternatives! &f(Paper, Purpur, Pufferfish)&c)"
+bad-core-warnings: "&c(Будь-ласка, змініть своє ядро на альтернативне! &f(Paper, Purpur, Pufferfish)&c)"
 command-error-syntax: "&cОй... здається щось пішло не так.. Перевірте написання команди!"
 unknown-world-error: "&cВи намагаєтесь змінити світ, якого не існує!"
 gamerule-value-change: "&aІгрове правило було успішно змінено для світу &f%world%!"
