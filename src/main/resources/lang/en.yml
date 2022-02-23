@@ -1,6 +1,7 @@
 # Author - bottleofench
 no-permissions: "&cYou don't have permissions for this!"
 reload: "&aConfiguration successfully reloaded!"
+bad-core-warnings: "&c(Please, change your server software to better alternatives! &f(Paper, Purpur, Pufferfish)&c)"
 command-error-syntax: "&cOops... Something went wrong.. Check the syntax of the command!"
 unknown-world-error: "&cYou're trying to change a world that doesn't exist!"
 gamerule-value-change: "&aThe game rule has been successfully changed for &f%world%!"

@@ -1,6 +1,7 @@
 # Author - bottleofench
 no-permissions: "&cУ вас нет прав на это!"
 reload: "&aКонфигурация плагина была перезагружена!"
+bad-core-warnings: "&c(Пожалуйста, поменяйте свое ядро на альтернативу! &f(Paper, Purpur, Pufferfish)&c)"
 command-error-syntax: "&cУпс... Кажется что-то пошло не так.. Проверьте написание команды!"
 unknown-world-error: "&cВы пытаетесь изменить мир, которого не существует!"
 gamerule-value-change: "&aИгровое правило было успешно изменено для мира &f%world%!"

@@ -8,8 +8,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public final class Main extends JavaPlugin {
+
+    private static final List<String> good_cores = Arrays.asList("Paper", "Purpur", "Pufferfish");
 
     private static long LAST_START_TIME = 0L;
     private static JavaPlugin plugin;
@@ -18,6 +23,9 @@ public final class Main extends JavaPlugin {
     }
     public static Plugin getInstance() {
         return plugin;
+    }
+    public static List<String> getGoodCores() {
+        return good_cores;
     }
     public static long getLastStartTime() {
         return LAST_START_TIME;

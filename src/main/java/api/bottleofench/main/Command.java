@@ -41,11 +41,24 @@ public class Command implements CommandExecutor {
                 final String ram_using = String.valueOf((runtime.maxMemory() - runtime.freeMemory()) / 1048576);
                 final String ram_max = String.valueOf(runtime.maxMemory() / 1048576);
                 final String cpu_using = String.valueOf((int) (osBean.getCpuLoad() * 100));
-                final String core = Bukkit.getServer().getVersion();
                 final String uptime = String.valueOf((System.currentTimeMillis() - Main.getLastStartTime()) / 1000 / 60);
                 final String loaded_chunks_count = String.valueOf(loaded_chunks);
                 final String player_count =  String.valueOf(Bukkit.getOnlinePlayers().size());
                 final String online_mode = String.valueOf(Bukkit.getOnlineMode());
+
+                String core = Bukkit.getServer().getVersion();
+                boolean good_core = false;
+                for (String str : Main.getGoodCores()) {
+                    if (core.contains(str)) {
+                        good_core = true;
+                        break;
+                    }
+                }
+
+                if (!good_core) {
+                    core += " " + Main.colorChat(LanguageManager.get("bad-core-warnings"));
+                }
+
 
                 if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
                     StringBuilder profile = new StringBuilder();
