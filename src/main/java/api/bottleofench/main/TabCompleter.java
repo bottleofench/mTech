@@ -87,12 +87,12 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
 
             if (args[1].equals("ticks-per-mob-spawn")) {
                 List<String> settings = new ArrayList<>();
-                if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.reset")) settings.add("reset");
-                if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.monsters")) settings.add("monsters");
-                if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.animals")) settings.add("animals");
-                if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.ambient")) settings.add("ambient");
-                if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.water-ambient")) settings.add("water-ambient");
-                if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.water-animals")) settings.add("water-animals");
+                if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.t-reset")) settings.add("reset");
+                if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.t-monsters")) settings.add("monsters");
+                if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.t-animals")) settings.add("animals");
+                if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.t-ambient")) settings.add("ambient");
+                if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.t-water-ambient")) settings.add("water-ambient");
+                if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.t-water-animals")) settings.add("water-animals");
 
                 List<String> result = new ArrayList<>();
                 for (String b : settings) {

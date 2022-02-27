@@ -7,9 +7,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.util.List;
 
-public class LanguageManager {
+public class LangManager {
     private static FileConfiguration info;
-    protected LanguageManager() {
+    protected LangManager() {
         if (Main.getInstance().getConfig().getString("language-file") == null) {
             Bukkit.getLogger().info("Failed to create language file! Please download default config file from GitHub or create custom language file!");
             Bukkit.getPluginManager().disablePlugin(Main.getInstance());

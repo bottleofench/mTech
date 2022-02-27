@@ -14,52 +14,48 @@ permissions:
     default: op
     children:
       player:
-        default: op
         children:
           player-profile:
-            default: op
+            description: yes.
       server-profile:
-        default: op
+        description: yes.
       reload:
-        default: op
+        description: yes.
       world:
-        default: op
         children:
           world-profile:
-            default: op
+            description: yes.
           gamerule:
-            default: op
+            description: yes.
           difficulty:
-            default: op
+            description: yes.
           pvp:
-            default: op
+            description: yes.
           spawn-limit:
-            default: op
             children:
               reset:
-                default: op
+                description: yes.
               monsters:
-                default: op
+                description: yes.
               animals:
-                default: op
+                description: yes.
               ambient:
-                default: op
+                description: yes.
               water-ambient:
-                default: op
+                description: yes.
               water-animals:
-                default: op
+                description: yes.
           ticks-per-mob-spawn:
-            default: op
             children:
-              reset:
-                default: op
-              monsters:
-                default: op
-              animals:
-                default: op
-              ambient:
-                default: op
-              water-ambient:
-                default: op
-              water-animals:
-                default: op
+              t-reset:
+                description: yes.
+              t-monsters:
+                description: yes.
+              t-animals:
+                description: yes.
+              t-ambient:
+                description: yes.
+              t-water-ambient:
+                description: yes.
+              t-water-animals:
+                description: yes.

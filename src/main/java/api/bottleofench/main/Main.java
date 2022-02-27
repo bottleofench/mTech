@@ -8,7 +8,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,9 +48,9 @@ public final class Main extends JavaPlugin {
         getCommand("mtech").setExecutor(new Command());
         getCommand("mtech").setTabCompleter(new TabCompleter());
 
-        new LanguageManager();
+        new LangManager();
 
-        Bukkit.getLogger().info(Main.colorChat("&7[&6mTech&7] &aSuccessfully enabled!"));
+        Bukkit.getLogger().info(colorChat("&7[&6mTech&7] &aSuccessfully enabled!"));
 
         Bukkit.getScheduler().runTaskTimer(getInstance(), () -> {
             if (Main.getInstance().getConfig().getBoolean("enable-warnings")) {
@@ -78,7 +77,7 @@ public final class Main extends JavaPlugin {
     }
 
     static String getColorString(String str) {
-        return ChatColor.translateAlternateColorCodes('&', LanguageManager.get(str));
+        return ChatColor.translateAlternateColorCodes('&', LangManager.get(str));
     }
 
     static String colorChat(String str) {

@@ -18,7 +18,7 @@ public class Command implements CommandExecutor {
         else if (args[0].equals("reload") && sender.hasPermission("mtech.reload")) {
             if (sender.hasPermission("mtech.reload")) {
                 Main.getInstance().reloadConfig();
-                new LanguageManager();
+                new LangManager();
                 sender.sendMessage(Main.getColorString("reload"));
             }
             else {
@@ -56,13 +56,13 @@ public class Command implements CommandExecutor {
                 }
 
                 if (!good_core) {
-                    core += " " + Main.colorChat(LanguageManager.get("bad-core-warnings"));
+                    core += " " + Main.colorChat(LangManager.get("bad-core-warnings"));
                 }
 
 
                 if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
                     StringBuilder profile = new StringBuilder();
-                    for (String s : LanguageManager.getStringList("server-profile")) {
+                    for (String s : LangManager.getStringList("server-profile")) {
                         profile.append(ChatColor.stripColor(Main.colorChat(s))
                                 .replace("%os%", osname)
                                 .replace("%arch%", arch)
@@ -78,7 +78,7 @@ public class Command implements CommandExecutor {
                     sender.sendMessage(Main.getColorString("hastebin.server-profile").replace("%link%", HastebinAPI.post(profile.toString())));
                 }
                 else {
-                    for (String s : LanguageManager.getStringList("server-profile")) {
+                    for (String s : LangManager.getStringList("server-profile")) {
                         sender.sendMessage(Main.colorChat(s)
                                 .replace("%os%", osname)
                                 .replace("%arch%", arch)
@@ -120,7 +120,7 @@ public class Command implements CommandExecutor {
 
                     if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
                         StringBuilder profile = new StringBuilder();
-                        for (String s : LanguageManager.getStringList("player-profile")) {
+                        for (String s : LangManager.getStringList("player-profile")) {
                             profile.append(ChatColor.stripColor(Main.colorChat(s))
                                     .replace("%nick%", nick)
                                     .replace("%ip%", ip)
@@ -139,7 +139,7 @@ public class Command implements CommandExecutor {
                         sender.sendMessage(Main.getColorString("hastebin.player-profile").replace("%link%", HastebinAPI.post(profile.toString())));
                     }
                     else {
-                        for (String s : LanguageManager.getStringList("player-profile")) {
+                        for (String s : LangManager.getStringList("player-profile")) {
                             sender.sendMessage(Main.colorChat(s)
                                     .replace("%nick%", p.getName())
                                     .replace("%ip%", p.getAddress().getHostName())
@@ -185,7 +185,7 @@ public class Command implements CommandExecutor {
                         }
                     }
                     if (args[2].equals("reset") && args[1].equals("ticks-per-mob-spawn")) {
-                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.reset")) {
+                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.t-reset")) {
                             world.setTicksPerSpawns(SpawnCategory.MONSTER, 1);
                             world.setTicksPerSpawns(SpawnCategory.ANIMAL, 400);
                             world.setTicksPerSpawns(SpawnCategory.WATER_AMBIENT, 1);
@@ -226,7 +226,7 @@ public class Command implements CommandExecutor {
                 }
                 else if (args.length == 4 && args[1].equals("ticks-per-mob-spawn")) {
                     if (args[2].equals("monsters")) {
-                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.monsters")) {
+                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.t-monsters")) {
                             try {
                                 world.setTicksPerSpawns(SpawnCategory.MONSTER, Integer.parseInt(args[3]));
                                 sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.monsters")
@@ -240,7 +240,7 @@ public class Command implements CommandExecutor {
                         }
                     }
                     if (args[2].equals("animals")) {
-                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.animals")) {
+                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.t-animals")) {
                             try {
                                 world.setTicksPerSpawns(SpawnCategory.ANIMAL, Integer.parseInt(args[3]));
                                 sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.animals")
@@ -254,7 +254,7 @@ public class Command implements CommandExecutor {
                         }
                     }
                     if (args[2].equals("ambient")) {
-                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.ambient")) {
+                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.t-ambient")) {
                             try {
                                 world.setTicksPerSpawns(SpawnCategory.AMBIENT, Integer.parseInt(args[3]));
                                 sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.ambient")
@@ -268,7 +268,7 @@ public class Command implements CommandExecutor {
                         }
                     }
                     if (args[2].equals("water-ambient")) {
-                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.water-ambient")) {
+                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.t-water-ambient")) {
                             try {
                                 world.setTicksPerSpawns(SpawnCategory.WATER_AMBIENT, Integer.parseInt(args[3]));
                                 sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.water-animals")
@@ -282,7 +282,7 @@ public class Command implements CommandExecutor {
                         }
                     }
                     if (args[2].equals("water-animals")) {
-                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.water-animals")) {
+                        if (sender.hasPermission("mtech.world.ticks-per-mob-spawn.t-water-animals")) {
                             try {
                                 world.setTicksPerSpawns(SpawnCategory.WATER_ANIMAL, Integer.parseInt(args[3]));
                                 sender.sendMessage(Main.getColorString("ticks-per-mob-spawn.water-ambient")
@@ -390,7 +390,7 @@ public class Command implements CommandExecutor {
 
                         if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
                             StringBuilder profile = new StringBuilder();
-                            for (String s : LanguageManager.getStringList("world-profile")) {
+                            for (String s : LangManager.getStringList("world-profile")) {
                                 profile.append(ChatColor.stripColor(Main.colorChat(s))
                                         .replace("%world%", worldName)
                                         .replace("%entity_count%", entity_count)
@@ -405,7 +405,7 @@ public class Command implements CommandExecutor {
                             sender.sendMessage(Main.getColorString("hastebin.world-profile").replace("%link%", HastebinAPI.post(profile.toString())));
                         }
                         else {
-                            for (String s : LanguageManager.getStringList("world-profile")) {
+                            for (String s : LangManager.getStringList("world-profile")) {
                                 sender.sendMessage(Main.colorChat(s)
                                         .replace("%world%", worldName)
                                         .replace("%entity_count%", entity_count)
