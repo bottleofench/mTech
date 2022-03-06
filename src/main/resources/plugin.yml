@@ -1,5 +1,5 @@
 name: mTech
-version: 0.1.2
+version: 0.2
 main: api.bottleofench.main.Main
 api-version: 1.18
 authors: [ bottleofench ]
@@ -16,46 +16,46 @@ permissions:
       player:
         children:
           player-profile:
-            description: yes.
+            description: Show player profile
       server-profile:
-        description: yes.
+        description: Show server profile
       reload:
-        description: yes.
+        description: Reload config
       world:
         children:
           world-profile:
-            description: yes.
+            description: Show world profile
           gamerule:
-            description: yes.
+            description: Set gamerule in specific world
           difficulty:
-            description: yes.
+            description: Set difficulty in specific world
           pvp:
-            description: yes.
+            description: Set pvp mode in specific world
           spawn-limit:
             children:
               reset:
-                description: yes.
+                description: Reset spawn limits in specific world
               monsters:
-                description: yes.
+                description: Set spawn limits for monsters in specific world
               animals:
-                description: yes.
+                description: Set spawn limits for animals in specific world
               ambient:
-                description: yes.
+                description: Set spawn limits for ambient mobs in specific world
               water-ambient:
-                description: yes.
+                description: Set spawn limits for water ambient mobs in specific world
               water-animals:
-                description: yes.
+                description: Set spawn limits for water animals in specific world
           ticks-per-mob-spawn:
             children:
               t-reset:
-                description: yes.
+                description: Reset ticks per mob spawn in specific world
               t-monsters:
-                description: yes.
+                description: Set ticks per mob spawn for monsters in specific world
               t-animals:
-                description: yes.
+                description: Set ticks per mob spawn for animals in specific world
               t-ambient:
-                description: yes.
+                description: Set ticks per mob spawn for ambient mobs in specific world
               t-water-ambient:
-                description: yes.
+                description: Set ticks per mob spawn for water ambient mobs in specific world
               t-water-animals:
-                description: yes.
+                description: Set ticks per mob spawn for water animals in specific world

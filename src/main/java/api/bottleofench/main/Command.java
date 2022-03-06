@@ -12,7 +12,6 @@ import java.util.Arrays;
 
 public class Command implements CommandExecutor {
     @Override
-    @SuppressWarnings("all")
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         if (args.length == 0) sender.sendMessage(Main.getColorString("command-error-syntax"));
         else if (args[0].equals("reload") && sender.hasPermission("mtech.reload")) {
@@ -59,7 +58,6 @@ public class Command implements CommandExecutor {
                     core += " " + Main.colorChat(LangManager.get("bad-core-warnings"));
                 }
 
-
                 if (Main.getInstance().getConfig().getBoolean("use-hastebin-for-profiles")) {
                     StringBuilder profile = new StringBuilder();
                     for (String s : LangManager.getStringList("server-profile")) {
@@ -104,7 +102,7 @@ public class Command implements CommandExecutor {
 
                     Player p = Bukkit.getPlayerExact(args[1]);
 
-                    final String nick = p.getName();
+                    final String nick = args[1];
                     final String ip = p.getAddress().getHostName();
                     final String x = String.valueOf((int) p.getLocation().getX());
                     final String y = String.valueOf((int) p.getLocation().getY());
