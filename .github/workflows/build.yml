@@ -10,8 +10,16 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Restore Maven cache
+        uses: skjolber/maven-cache-github-action@v1
+        with:
+          step: restore
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+      - name: Save Maven cache
+        uses: skjolber/maven-cache-github-action@v1
+        with:
+          step: save
       - name: Prepare to upload artifact
         run: mkdir staging && cp target/mTech-0.2.jar staging && mv staging/mTech-0.2.jar staging/mTech.jar
       - name: Upload Artifact
